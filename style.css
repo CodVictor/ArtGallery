@@ -8,6 +8,10 @@ header {
     text-align: center;
 }
 
+.header a {
+    color: black;
+}
+
 .foto-containers {
     background-image: linear-gradient(
         rgba(0,0,0,0.3), 
@@ -55,7 +59,12 @@ max-width: 300px; /* Limitar el tamaño máximo */
     padding: auto; 
 }
 
-footer {
+footer{
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.footer h3{
     padding-bottom: 20px;
     text-align: center;
 }
@@ -110,6 +119,30 @@ footer {
     text-align: center;
     padding-top: 50px;
 
+}
+
+.descripcion a {
+    display: inline-block; 
+    width: 60%; 
+    max-width: 500px; 
+    margin: 0 auto; 
+    text-align: left; 
+    padding: 10px; 
+    line-height: 1.6; 
+    font-size: 20px;
+}
+.opinion-autor {
+    text-align: center;
+}
+.opinion-autor a, h3{
+display: inline-block; 
+    width: 60%; 
+    max-width: 500px; 
+    margin: 0 auto; 
+    text-align: left; 
+    padding: 10px; 
+    line-height: 1.6; 
+    font-size: 20px;
 }
 
 .boton-container {
