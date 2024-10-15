@@ -1,48 +1,118 @@
-.header {
-    display: flex;
-    width: 100%;
-    height: 20em;
-    padding: 5em;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
+* {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+header {
+    padding-top: 20px;
+    padding-bottom: 20px ;
+    color: black;
+    text-align: center;
+}
+
+.foto-containers {
+    background-image: linear-gradient(
+        rgba(0,0,0,0.3), 
+        rgba(0,0,0,0.7)),
+        url(Imagenes/background.jpg);
+
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: aliceblue;
+}
+/* Ajustar el tamaño de las imágenes */
+.foto-containers img {
+    width: 100%; /* Que ocupe el 100% del contenedor */
+    height: auto; /* Mantener proporciones */
+    max-width: 150px; /* Limitar el tamaño máximo */
+}
+
+.foto-containers {
+    text-align: center; /* Centrar las imágenes y textos */
+}
+
+.cuadro-1 {
+    margin-bottom: 30px; /* Espacio entre cada grupo de imágenes */
+    margin-top: 30px;
+    padding: auto; 
+}
+
+h3 {
+    margin-top: 15px;
+}
+.foto-info-container img { 
+width: 100%; /* Que ocupe el 100% del contenedor */
+height: auto; /* Mantener proporciones */
+max-width: 300px; /* Limitar el tamaño máximo */
 
 }
-.container{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: space-evenly;
+.cuadro-2 {
+    margin-bottom: 250px; /* Espacio entre cada grupo de imágenes */
+    margin-top: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: auto; 
 }
-.item {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-.itemimg {
-  max-width: 30%;
-  border: 5px;
-  border-color: black;
-}
-.itemtext{
-    width: 50%;
-    color: black; /*abierto a cambio según fondo*/
-    text-align: justify;
-    font-size: medium;
-    font-weight:600;
-    font-family: Helvetica, Arial, sans-serif;
-}
-.footer {
-    display: flex;
-    width: 100%;
-    height: 20em;
-    padding: 5em;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: start;
-    align-items: start;
 
+footer {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    background-color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.titulo-obras {
+    padding-top: 40px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-style: italic;
+    color: white;
+}
+
+.opinions {
+    text-align: center;
+    padding-bottom: 20px;
+    font-weight: bold;
+}
+
+.aspecto-principal {
+
+    background-image: linear-gradient(
+        rgba(0,0,0,0.3), 
+        rgba(0,0,0,0.7)),
+        url(Imagenes/background.jpg);
+
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: aliceblue;
+    
+}
+.cuadro-2 {
+    width: 100%; /* Asegúrate de que el contenedor tenga un ancho definido */
+    text-align: center; /* Centra texto e imágenes dentro del contenedor */
+}
+
+.cuadro-2 img {
+    display: block; /* Asegúrate de que la imagen sea un bloque para que los márgenes funcionen */
+    margin-left: auto; /* Márgenes automáticos para centrar */
+    margin-right: auto; /* Márgenes automáticos para centrar */
+    max-width: 300px; /* Limitar el tamaño máximo */
+    width: 100%; /* Que ocupe el 100% del contenedor */
+    height: auto; /* Mantener proporciones */
+}
+
+.descripcion {
+    text-align: center;
+    padding-top: 50px;
+
+}
+
+.boton-container {
+    padding-bottom: 40px;
 }
