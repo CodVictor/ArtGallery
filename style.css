@@ -28,9 +28,9 @@ header {
 
 /* Ajustar el tamaño de las imágenes */
 .foto-containers img {
-    width: 100%; /* Que ocupe el 100% del contenedor */
-    height: auto; /* Mantener proporciones */
-    max-width: 150px; /* Limitar el tamaño máximo */
+    width: 100%; 
+    height: auto; 
+    max-width: 150px; 
     padding-top: 20px;
 }
 
@@ -44,7 +44,7 @@ header {
 }
 
 .cuadro-1 {
-    margin-bottom: 30px; /* Espacio entre cada grupo de imágenes */
+    margin-bottom: 30px; /*spacio entre cada grupo de imágenes */
     margin-top: 30px;
     padding: auto; 
 }
@@ -55,8 +55,8 @@ header {
 .foto-info-container img { 
 width: 100%; /* Que ocupe el 100% del contenedor */
 height: auto; /* Mantener proporciones */
-max-width: 300px; /* Limitar el tamaño máximo */
-
+max-width: 300px; /*Limitar el tamaño máximo */
+border-radius: 20px; /*da curvatura a cuadro*/
 }
 .cuadro-2 {
     margin-bottom: 250px; /* Espacio entre cada grupo de imágenes */
@@ -97,9 +97,22 @@ footer{
 
 .opinions {
     text-align: center;
-    margin-bottom: 110px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    background-color: #0000007b;
+    width: 400px; 
+    margin: 0 auto; 
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
+.opinions input[type="text"],
+.opinions textarea {
+    width: 80%; 
+    padding: 10px; 
+    margin: 10px 0;
+    box-sizing: border-box; 
+}
 .aspecto-principal {
     background-image: linear-gradient(
         rgba(0,0,0,0.3), 
@@ -113,12 +126,12 @@ footer{
 }
 
 .cuadro-2 img {
-    display: block; /* Asegúrate de que la imagen sea un bloque para que los márgenes funcionen */
-    margin-left: auto; /* Márgenes automáticos para centrar */
-    margin-right: auto; /* Márgenes automáticos para centrar */
-    max-width: 300px; /* Limitar el tamaño máximo */
-    width: 100%; /* Que ocupe el 100% del contenedor */
-    height: auto; /* Mantener proporciones */
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+    max-width: 300px; 
+    width: 100%;
+    height: auto; 
 }
 
 .descripcion {
@@ -141,6 +154,7 @@ footer{
     text-align: center;
 }
 .opinion-autor a{
+    font-style: italic;
     display: inline-block; 
     width: 60%; 
     max-width: 500px; 
@@ -174,6 +188,21 @@ a {
 
 .new-cuadro {
     text-align: center;
-    padding-top: 60px;
+    padding-top: 70px;
     padding-bottom: 70px;
+    background-color: #00000064;
+    width: 400px; 
+    margin: 0 auto; 
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
 }
+.new-cuadro input[type="text"],
+.new-cuadro textarea,
+.new-cuadro input[type="date"],
+.new-cuadro input[type="file"] {
+    width: 80%; /* Ajusta el ancho*/
+    padding: 10px; 
+    margin: 10px 0; /* Añade margen superior e inferior */
+    box-sizing: border-box; /*padding no afecta el ancho total */
+}
+
