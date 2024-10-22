@@ -99,7 +99,7 @@ footer{
     text-align: center;
     padding-top: 70px;
     padding-bottom: 70px;
-    background-color: #0000007b;
+    background-color: #000000b3 ;
     width: 400px; 
     margin: 0 auto; 
     border-radius: 10px;
@@ -177,8 +177,14 @@ footer{
 .botones-container {
     display: flex;
     justify-content: space-evenly; 
-    gap: 100px; 
+    align-items: center; 
     padding: 60px;
+    width:100%;
+}
+.botones-container button {
+    width:9.8em;
+    border-radius:10px;
+    border: ;
 }
 
 a {
@@ -203,6 +209,5 @@ a {
     width: 80%; /* Ajusta el ancho*/
     padding: 10px; 
     margin: 10px 0; /* Añade margen superior e inferior */
-    box-sizing: border-box; /*padding no afecta el ancho total */
-}
+    box-sizing: border-box; /*padding no afecta el ancho total */}
 
