@@ -140,7 +140,7 @@ footer{
 
 }
 
-.descripcion a {
+.descripcion p {
     display: inline-block; 
     width: 60%; 
     max-width: 500px; 
@@ -153,7 +153,7 @@ footer{
 .opinion-autor {
     text-align: center;
 }
-.opinion-autor a{
+.opinion-autor p{
     font-style: italic;
     display: inline-block; 
     width: 60%; 
@@ -184,7 +184,7 @@ footer{
 .botones-container button {
     width:9.8em;
     border-radius:10px;
-    border: ;
+    /*border: ;*/
 }
 
 a {
