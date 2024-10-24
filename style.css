@@ -24,6 +24,7 @@ header {
     background-repeat: no-repeat;
     background-size: cover;
     color: aliceblue;
+    text-align: center;
 }
 
 /* Ajustar el tamaño de las imágenes */
@@ -32,15 +33,6 @@ header {
     height: auto; 
     max-width: 150px; 
     padding-top: 20px;
-}
-
-.foto-containers {
-    text-align: center;
-
-}
-.foto-containers h3 {
-    text-align: center;
-    
 }
 
 .cuadro-1 {
@@ -59,8 +51,8 @@ max-width: 300px; /*Limitar el tamaño máximo */
 border-radius: 20px; /*da curvatura a cuadro*/
 }
 .cuadro-2 {
-    margin-bottom: 250px; /* Espacio entre cada grupo de imágenes */
-    margin-top: 100px;
+    margin-bottom: 50px; /* Espacio entre cada grupo de imágenes */
+    margin-top: 20px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -72,6 +64,8 @@ border-radius: 20px; /*da curvatura a cuadro*/
 footer{
     padding-bottom: 20px;
     text-align: center;
+    background-color: rgb(255, 255, 255);
+    font-weight: bold;
 }
 
 .footer h3{
@@ -80,13 +74,8 @@ footer{
     padding-top: 10px;
 }
 
-.footer-content {
-    background-color: rgb(255, 255, 255);
-    font-weight: bold;
-}
-
 .titulo-obras {
-    padding-top: 40px;
+    padding-top: 20px;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -135,17 +124,12 @@ footer{
 }
 
 .descripcion {
-    text-align: center;
-    padding-top: 50px;
-
-}
-
-.descripcion p {
     display: inline-block; 
     width: 60%; 
     max-width: 500px; 
     margin: 0 auto; 
     text-align: justify; 
+    padding-top: 70px;
     padding: 10px; 
     line-height: 1.6; 
     font-size: 20px;
@@ -183,7 +167,7 @@ footer{
 }
 .botones-container button {
     width:9.8em;
-    border-radius:10px;
+    border-radius:0.625;
     /*border: ;*/
 }
 
@@ -202,10 +186,8 @@ a {
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
 }
-.new-cuadro input[type="text"],
-.new-cuadro textarea,
-.new-cuadro input[type="date"],
-.new-cuadro input[type="file"] {
+.new-cuadro input,
+.new-cuadro textarea {
     width: 80%; /* Ajusta el ancho*/
     padding: 10px; 
     margin: 10px 0; /* Añade margen superior e inferior */
