@@ -11,48 +11,39 @@
     <header class="header">
         <div class="header-content container">
             <h1><a href="index.html"><strong>Vanguardia Visual</strong></a></h1>
-            <p>Bienvenido a tu Galeria de Arte preferida!</p>
+            <p>Bienvenido a tu Galería de Arte preferida!</p>
         </div>
     </header>
     
     <section class="aspecto-principal">
-
-        <div class="new-cuadro">
+        <section class="new-cuadro">
             <h2>¿Deseas añadir un nuevo cuadro?</h2>
             <form id="fotoDescription">
-            <label for="userName">¿Como se llama el autor?</label><br>
+            <label for="userName">¿Cómo se llama el autor?</label><br>
             <input type="text" id="userName" name="userName" required><br><br>
             
-            <label for="fotoDescription">Escribe una descripcion</label><br>
+            <label for="fotoDescription">Escribe una descripción</label><br>
             <textarea id="fotoDescription" name="fotoDescription" rows="6" required></textarea><br><br>
             
             <form id="fotoDescription">
-                <label for="fotoDate">¿Cual es la fecha del cuadro?</label><br>
-                <input type="date" id="fotoDate" name="fotoDate" required><br><br> <!--añadir fecha maxima (hoy)-->
+                <label for="fotoDate">¿Cuál es la fecha del cuadro?</label><br>
+                <input type="date" id="fotoDate" name="fotoDate" required><br><br> <!--añadir fecha máxima (hoy) con script posteriormente-->
                 
             <form id="file-foto">
-                <label for="file-foto">Adjunta el cuadro</label><br>
+                <label for="file-foto">Adjunta el cuadro :</label><br>
                 <input type="file" id="file-foto" name="file-foto" required><br><br>
                 
                 <button type="button" class="btn btn-danger btn-lg" onclick="location.href='index.html'">Cancelar</button>
                 <button type="button" class="btn btn-primary btn-lg">Crear nuevo cuadro</button>
-
             </form>
-        </div>
-
+        </section>
     </section>
 
 
-    <footer class="footer">
-        <div class="footer-content container">
-            <div class="link">
-                <h3>Vanguardia Visual</h3>
-                <ul class="mensaje-fin">
-                    <a>Has llegado al fin de la pagina ®</a> 
-                </ul>
-            </div>
-        </div>
-    </footer> 
+    <footer>
+        <h3>Vanguardia Visual</h3>
+        <p>Has llegado al fin de la página ®</p>
+    </footer>
 
 </body>
 </html>

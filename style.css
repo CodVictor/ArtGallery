@@ -1,3 +1,4 @@
+/*-----HEADER Y FOOTER-----*/
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 * {
     font-family: "Kanit", sans-serif;
@@ -14,9 +15,15 @@ header {
     color: black;
 }
 
+footer{
+    padding-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+}
+/*-----INDEX-----*/
 .foto-containers {
     background-image: linear-gradient(
-        rgba(0,0,0,0.3), 
+        rgba(0,0,0,0.7), 
         rgba(0,0,0,0.7)),
         url(Imagenes/background.jpg);
 
@@ -24,42 +31,41 @@ header {
     background-repeat: no-repeat;
     background-size: cover;
     color: aliceblue;
+    text-align: center;
 }
-
-/* Ajustar el tamaño de las imágenes */
 .foto-containers img {
     width: 100%; 
     height: auto; 
     max-width: 150px; 
     padding-top: 20px;
 }
-
-.foto-containers {
-    text-align: center;
-
-}
 .foto-containers h3 {
     text-align: center;
+    margin-top: 10px;
     
 }
-
 .cuadro-1 {
-    margin-bottom: 30px; /*spacio entre cada grupo de imágenes */
+    margin-bottom: 30px; 
     margin-top: 30px;
     padding: auto; 
 }
+.boton-container {
+    padding-bottom: 40px;
+}
+
+/*-----INFO-----*/
 
 .foto-info-container h3 {
     margin-top: 15px;
 }
 .foto-info-container img { 
-width: 100%; /* Que ocupe el 100% del contenedor */
-height: auto; /* Mantener proporciones */
-max-width: 300px; /*Limitar el tamaño máximo */
-border-radius: 20px; /*da curvatura a cuadro*/
+    width: 100%; 
+    height: auto; 
+    max-width: 300px; 
+    border-radius: 20px; 
 }
 .cuadro-2 {
-    margin-bottom: 250px; /* Espacio entre cada grupo de imágenes */
+    margin-bottom: 100px; 
     margin-top: 100px;
     display: block;
     margin-left: auto;
@@ -68,23 +74,18 @@ border-radius: 20px; /*da curvatura a cuadro*/
     width: 100%; 
     text-align: center;
 }
-
-footer{
-    padding-bottom: 20px;
-    text-align: center;
+.cuadro-2 img {
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+    max-width: 300px; 
+    width: 100%;
+    height: auto; 
 }
-
-.footer h3{
-    padding-bottom: 20px;
-    text-align: center;
-    padding-top: 10px;
+.fecha {
+    font-style: italic;
+    color:darkgrey;
 }
-
-.footer-content {
-    background-color: rgb(255, 255, 255);
-    font-weight: bold;
-}
-
 .titulo-obras {
     padding-top: 40px;
     text-align: center;
@@ -94,56 +95,26 @@ footer{
     font-style: italic;
     color: white;
 }
-
-.opinions {
-    text-align: center;
-    padding-top: 70px;
-    padding-bottom: 70px;
-    background-color: #000000b3 ;
-    width: 400px; 
-    margin: 0 auto; 
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
-}
-
-.opinions input[type="text"],
-.opinions textarea {
-    width: 80%; 
-    padding: 10px; 
-    margin: 10px 0;
-    box-sizing: border-box; 
-}
 .aspecto-principal {
     background-image: linear-gradient(
-        rgba(0,0,0,0.3), 
-        rgba(0,0,0,0.7)),
+        rgba(0,0,0,0.6), 
+        rgba(0,0,0,0.4)),
         url(Imagenes/background.jpg);
     background-position:center;
     background-repeat: no-repeat;
     background-size: cover;
     color: aliceblue;
     background-attachment: fixed;
+    padding:30px;
 }
-
-.cuadro-2 img {
-    display: block; 
-    margin-left: auto; 
-    margin-right: auto; 
-    max-width: 300px; 
-    width: 100%;
-    height: auto; 
-}
-
 .descripcion {
     text-align: center;
     padding-top: 50px;
-
 }
-
-.descripcion a {
+.descripcion p{
     display: inline-block; 
-    width: 60%; 
-    max-width: 500px; 
+    width: 62%; 
+    max-width: 700px; 
     margin: 0 auto; 
     text-align: justify; 
     padding: 10px; 
@@ -152,62 +123,140 @@ footer{
 }
 .opinion-autor {
     text-align: center;
+    margin-bottom: 0px;
 }
-.opinion-autor a{
+.opinion-autor p{
     font-style: italic;
     display: inline-block; 
-    width: 60%; 
-    max-width: 500px; 
+    width: 62%; 
+    max-width: 700px; 
     margin: 0 auto; 
     text-align: justify; 
     padding: 10px; 
     line-height: 1.6; 
     font-size: 20px;
 }
-
-.boton-container {
-    padding-bottom: 40px;
-}
-
-.fecha {
-    font-style: italic;
-    color:darkgrey;
-}
-
-.botones-container {
-    display: flex;
-    justify-content: space-evenly; 
-    align-items: center; 
-    padding: 60px;
-    width:100%;
-}
-.botones-container button {
-    width:9.8em;
-    border-radius:10px;
-    border: ;
-}
-
 a {
     text-decoration: none;
     color: aliceblue;
 }
+.opinar{
+    padding-bottom: 50px;
+}
+.opinar h1{
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.resenias {
+    padding: 50px;
+    width:60%;
+    max-width: 700px; 
+    margin: auto; /* (top, right/left: auto, bottom) */
+    background-color: rgba(7, 7, 13, 0.828);
+    border-radius: 10px;
+    padding-bottom: 50px;
+}
+.resenia-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.resenia-header h3 {
+    color: #3783ca;
+}
+
+.resenia-fecha {
+    font-size: 0.9em;
+    color: #7f8c8d;
+}
+
+.resenia-text {
+    margin-top: 10px;
+    font-size: 1.1em;
+    text-align: justify;
+    font-style: italic;
+}
+
+.resenia-form {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #2980b9;
+}
+
+.resenia-form h2 {
+    text-align: center;
+    margin-bottom:10px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid gray;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.resenia-form button {
+    background-color: #2980b9;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+}
+button:hover {
+    background-color: #173b53;
+}
+
+/*-----NEW CUADRO-----*/
 
 .new-cuadro {
+    display:block;
     text-align: center;
     padding-top: 70px;
     padding-bottom: 70px;
-    background-color: #00000064;
-    width: 400px; 
+    background-color: #00000099;
+    max-width: 700px; 
+    width: 60%;
     margin: 0 auto; 
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
 }
-.new-cuadro input[type="text"],
-.new-cuadro textarea,
-.new-cuadro input[type="date"],
-.new-cuadro input[type="file"] {
-    width: 80%; /* Ajusta el ancho*/
+.new-cuadro input[type="text"]{
+    width: 60%; 
     padding: 10px; 
-    margin: 10px 0; /* Añade margen superior e inferior */
-    box-sizing: border-box; /*padding no afecta el ancho total */}
+    margin: 10px 0; 
+    box-sizing: border-box;
+    border-radius: 5px; 
+}
+.new-cuadro textarea{
+    width: 80%; 
+    padding: 10px; 
+    margin: 10px 0; 
+    box-sizing: border-box;
+    border-radius: 5px; 
+}
+.new-cuadro input[type="file"] {
+    width: 210px; 
+    margin: 10px 0; 
+    box-sizing: border-box;
+}
+.new-cuadro input[type="date"]{
+    width: 180px; 
+    padding: 10px; 
+    margin: 10px 0; 
+    box-sizing: border-box;
+    border-radius: 5px; 
+
+}
+.new-cuadro button{
+    margin:5px;
+}
+
+
 
