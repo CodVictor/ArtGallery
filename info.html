@@ -21,12 +21,13 @@
     <section class="foto-info-container">
         <div class="row">
         <div class="cuadro-2">  
-            <img src="Imagenes/imageOne.jpg" alt="imagen-2">
-            <div class="fecha">
-                <p > Fecha 09/12/1698</p>
-                <div>
-                    <p>Autor Joan Poig</p>
-                    <p>Precio  1,025,000€</p>
+            <div class="box-primary">
+                <img src="Imagenes/imageOne.jpg" alt="imagen-2">
+                <p class="autor"> Joan Poig</p>
+                <div class="propiedades">
+                    <p>Barroco</p>
+                    <p> 09/12/1698</p>
+                    <p> 1,025,000€</p>
                 </div>
             </div>
             <div class="descripcion">
@@ -97,11 +98,23 @@
                 <form id="reseniaForm">
                     <input type="text" id="userName" placeholder="Tu nombre" required>
                     <textarea id="userReview" placeholder="Escribe tu reseña..." required></textarea>
-                    <button type="submit">Enviar Reseña</button>
+                    <div class="send-button"> 
+                        <button class="btn btn-primary">Enviar Reseña</button>
+                    </div>
+                    <div class="secondary-buttons">
+                        <button type="button" class="btn btn-outline-danger">Borrar Reseña</button>
+                        <button type="edit" class="btn btn-outline-success">Editar Reseña</button>
+                    </div>
                 </form>
             </div>
         </div>
     </section>
+    <div class="bottom-buttons">
+        <button type="button" class="btn btn-danger">Borrar Cuadro</button>
+        <button type="edit" class="btn btn-success">Editar Cuadro</button>
+        <button type="button" class="btn btn-primary"><a href="index.html">Volver a Inicio</a></button>
+
+    </div>              
 </section>
 
 <footer>

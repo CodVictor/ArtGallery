@@ -62,8 +62,7 @@ footer{
 .foto-info-container img { 
     width: 100%; 
     height: auto; 
-    max-width: 300px; 
-    border-radius: 20px; 
+    border: #afb8c2 8px inset; 
 }
 .cuadro-2 {
     margin-bottom: 100px; 
@@ -79,13 +78,22 @@ footer{
     display: block; 
     margin-left: auto; 
     margin-right: auto; 
-    max-width: 300px; 
-    width: 100%;
+    max-width: 700px; 
+    width: 62%;
     height: auto; 
 }
-.fecha {
-    font-style: italic;
-    color:darkgrey;
+.cuadro-2 .autor{
+    margin-top: 10px;
+    font-size: 20px;
+}
+.cuadro-2 .propiedades{
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap:20px;
+    max-width: 700px;
+    width:62%;
+    font-size: 20px;
+    justify-content: center;
 }
 .titulo-obras {
     padding-top: 20px;
@@ -201,10 +209,7 @@ textarea {
     border-radius: 5px;
     font-size: 1em;
 }
-
-.resenia-form button {
-    background-color: #2980b9;
-    color: white;
+.resenia-form .send-button *{
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
@@ -212,8 +217,27 @@ textarea {
     font-size: 1em;
     width: 100%;
 }
-button:hover {
+
+.button-submit:hover {
     background-color: #173b53;
+}
+.secondary-buttons{
+    display: flex;
+    margin-top: 20px;
+    justify-content:space-between; 
+}
+.secondary-buttons *{
+    width:48%;
+}
+.bottom-buttons {
+    display: flex;
+    margin-top: 20px;
+    justify-content:space-around; 
+    margin-bottom: 20px;
+}
+.bottom-buttons *{
+    width:20%;
+    font-size: 20px;
 }
 
 /*-----NEW CUADRO-----*/
