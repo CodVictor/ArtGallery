@@ -84,7 +84,7 @@ footer{
 }
 .cuadro-2 .autor{
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 25px;
 }
 .cuadro-2 .propiedades{
     display: inline-flex;
@@ -106,8 +106,8 @@ footer{
 }
 .aspecto-principal {
     background-image: linear-gradient(
-        rgba(0,0,0,0.6), 
-        rgba(0,0,0,0.4)),
+        rgba(0,0,0,0.7), 
+        rgba(0,0,0,0.6)),
         url(Imagenes/background.jpg);
     background-position:center;
     background-repeat: no-repeat;
@@ -243,7 +243,6 @@ textarea {
 /*-----NEW CUADRO-----*/
 
 .new-cuadro {
-    display:block;
     text-align: center;
     padding-top: 70px;
     padding-bottom: 70px;
@@ -253,35 +252,39 @@ textarea {
     margin: 0 auto; 
     border-radius: 10px;
 }
+.new-cuadro h2{
+    margin-bottom: 40px;
+}
 .new-cuadro input[type="text"]{
     width: 60%; 
     padding: 10px; 
-    margin: 10px 0; 
-    box-sizing: border-box;
     border-radius: 5px; 
+    margin-bottom:20px;
+}
+.new-cuadro input[type="number"]{
+    margin-bottom: 20px;
 }
 .new-cuadro textarea{
     width: 80%; 
     padding: 10px; 
-    margin: 10px 0; 
+    margin-bottom: 20px; 
+    box-sizing: border-box;
+    border-radius: 5px; 
+}
+.new-cuadro input[type="date"]{
+    width: 180px; 
+    padding: 10px; 
+    margin-bottom: 20px; 
     box-sizing: border-box;
     border-radius: 5px; 
 }
 .new-cuadro input[type="file"] {
     width: 210px; 
-    margin: 10px 0; 
+    margin-bottom: 50px ; 
     box-sizing: border-box;
-}
-.new-cuadro input[type="date"]{
-    width: 180px; 
-    padding: 10px; 
-    margin: 10px 0; 
-    box-sizing: border-box;
-    border-radius: 5px; 
-
 }
 .new-cuadro button{
-    margin:5px;
+   margin: 8px;
 }
 
 

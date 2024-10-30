@@ -20,30 +20,28 @@
             <h2>¿Deseas añadir un nuevo cuadro?</h2>
 
         <form id="fotoDescription">
-            <label for="artName">¿Cual es el título de la obra?</label><br>
-            <input type="text" id="artName" name="artName" required maxlength="30"><br><br>
-
-            <label for="painter-Name">¿Quien es el autor de la obra?</label><br>
-            <input type="text" id="painter-Name" name="painter-Name" required maxlength="35"><br><br>
+            <label for="artName">¿Cuál es el título de la obra?</label><br>
+            <input type="text" id="artName" name="artName" required maxlength="30"><br>
+            <label for="painter-Name">¿Quién es el autor de la obra?</label><br>
+            <input type="text" id="painter-Name" name="painter-Name" required maxlength="35"><br>
             
             <label for="period">¿A qué período o corriente pertenece la obra?</label><br>
-            <input type="text" id="period" name="period" required maxlength="20"><br><br>
+            <input type="text" id="period" name="period" required maxlength="20"><br>
 
-            <label for="monetary-value">¿Cuanto cuesta la obra?</label><br>
-            <input type="number" id="monetary-value" name="monetary-value" required><br><br>
-            
+            <label for="monetary-value">¿Cuánto cuesta la obra?</label><br>
+            <input type="number" id="monetary-value" name="monetary-value" min="0" required >
+            <br><br>            
             <label for="fotoDescription">Escribe una descripción</label><br>
-            <textarea id="fotoDescription" name="fotoDescription" rows="6" required></textarea><br><br>
+            <textarea id="fotoDescription" name="fotoDescription" rows="6" required></textarea><br>
             
-            <label for="painter-Opinion">Escribe la opinion del autor</label><br>
-            <textarea id="painter-Opinion" name="painter-Opinion" rows="6" required></textarea><br><br>
+            <label for="painter-Opinion">Escribe la opinión del autor</label><br>
+            <textarea id="painter-Opinion" name="painter-Opinion" rows="6" required></textarea><br>
             
             <label for="fotoDate">¿Cuál es la fecha del cuadro?</label><br>
-            <input type="date" id="fotoDate" name="fotoDate" required><br><br> <!--añadir fecha máxima (hoy) con script posteriormente-->
+            <input type="date" id="fotoDate" name="fotoDate" required><br> <!--añadir fecha máxima (hoy) con script posteriormente-->
                 
             <label for="file-foto">Adjunta el cuadro</label><br>
-            <input type="file" id="file-foto" name="file-foto" required><br><br>
-                
+            <input type="file" id="file-foto" name="file-foto" required><br>              
                 <button type="button" class="btn btn-danger btn-lg" onclick="location.href='index.html'">Cancelar</button>
                 <button type="button" class="btn btn-primary btn-lg">Crear nuevo cuadro</button>
         </form>
