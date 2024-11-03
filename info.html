@@ -71,6 +71,8 @@
                 <div class="resenia-header">
                     <h3>María López</h3>
                     <span class="resenia-fecha">12/10/2024</span>
+                    <span class="rating">5 <i class="bi bi-star-fill"></i></span>
+
                 </div>
                 <p class="resenia-text"> Este cuadro me ha impactado profundamente desde el primer momento que lo vi. Los colores vibrantes parecen 
                     contar una historia por sí solos, mientras las formas abstractas invitan a la interpretación personal. Me 
@@ -83,6 +85,8 @@
                 <div class="resenia-header">
                     <h3>Juan Pérez</h3>
                     <span class="resenia-fecha">10/10/2024</span>
+                    <span class="rating">4 <i class="bi bi-star-fill"></i></span>
+
                 </div>
                 <p class="resenia-text"> Este cuadro me llamó la atención por su serenidad y su uso de colores suaves, que crean una atmósfera tranquila. 
                     Sin embargo, aunque transmite cierta paz, siento que le falta algo de impacto o profundidad emocional. Los 
@@ -98,6 +102,16 @@
                 <form id="reseniaForm">
                     <input type="text" id="userName" placeholder="Tu nombre" required>
                     <textarea id="userReview" placeholder="Escribe tu reseña..." required></textarea>
+                    <div class="num-select">
+                    <label for="number-select">Valora del 1 - 5 el cuadro : </label>
+                    <select class="number-rating" id="number-select" name="numbers">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5" selected>5</option>
+                    </select>
+                    </div>
                     <div class="send-button"> 
                         <button class="btn btn-primary">Enviar Reseña</button>
                     </div>

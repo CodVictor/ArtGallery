@@ -172,14 +172,32 @@ a {
     justify-content: space-between;
     align-items: center;
 }
-
 .resenia-header h3 {
+    display: inline-flex;
     color: #3783ca;
+    width:70%;
 }
 
 .resenia-fecha {
     font-size: 0.9em;
     color: #7f8c8d;
+}
+.resenia-header .rating{
+    text-wrap: nowrap;
+    color:orange;
+    margin-left: 5px;
+}
+@media (max-width: 780px){
+    .resenia-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 5px;
+        margin-bottom: 15px;
+    }
+    .resenia-header h3{
+        width:100%;
+    }
 }
 
 .resenia-text {
@@ -217,7 +235,11 @@ textarea {
     font-size: 1em;
     width: 100%;
 }
-
+.num-select{
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
 .button-submit:hover {
     background-color: #173b53;
 }
