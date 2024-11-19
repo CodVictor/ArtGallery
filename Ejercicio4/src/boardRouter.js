@@ -8,14 +8,13 @@ const UPLOADS_FOLDER = 'uploads';
 const DEMO_FOLDER = 'demo';
 
 //Copy demo images to upload folder
-fs.cp(DEMO_FOLDER+'/Image3.jpg', UPLOADS_FOLDER+'/Image3.jpg');
+fs.cp(DEMO_FOLDER+'/image1.jpg', UPLOADS_FOLDER+'/image1.jpg');
 fs.cp(DEMO_FOLDER+'/image4.jpg', UPLOADS_FOLDER+'/image4.jpg');
 
 boardService.addPost({ 
-    user: 'Pepe', 
-    title: 'Vendo moto', 
-    text: 'Barata, barata', 
-    imageFilename: 'Image3.jpg' 
+    imageFilename: 'image1.jpg',
+    style: 'Barroco', 
+    title: 'De Antes', 
 });
 
 boardService.addPost({ 
