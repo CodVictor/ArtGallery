@@ -1,25 +1,25 @@
-const posts = new Map();
+const cuadros = new Map();
 let nextId = 0;
 
-export function addPost(post) {
+export function addCuadro(cuadro) {
     let id = nextId++;
-    post.id = id.toString();
-    posts.set(post.id, post);
+    cuadro.id = id.toString();
+    cuadros.set(cuadro.id, cuadro);
 }
 
-export function deletePost(id){
+export function deleteCuadro(id){
 
-    let post = getPost(id);
+    let cuadro = getCuadro(id);
 
-    posts.delete(id);
+    cuadros.delete(id);
 
-    return post;
+    return cuadro;
 }
 
-export function getPosts(){
-    return [...posts.values()];
+export function getCuadros(){
+    return [...cuadros.values()];
 }
 
-export function getPost(id){
-    return posts.get(id);
+export function getCuadro(id){
+    return cuadros.get(id);
 }
