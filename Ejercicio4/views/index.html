@@ -19,8 +19,8 @@
             <div class="row">
                 {{#cuadros}}
                 <div class="col-md-4 cuadro-1">
-                    <a href="info.html">
-                    <img src="/cuadro/{{id}}/image" alt="imagen-1"> 
+                    <a href="info.html/{{id}}">
+                    <img src="/cuadro/{{id}}/image" alt="imagen-{{id}}"> 
                     <h3>{{title}}</h3>
                     <p>{{style}}</p>
                 </a>
@@ -30,7 +30,7 @@
         </div>
 
         <div class="boton-container">
-        <button class="btn btn-outline-primary btn-lg"><a href="new-cuadro.html">Añadir Cuadro</a></button>
+        <a href="/new-cuadro.html"><button class="btn btn-outline-primary btn-lg">Añadir Cuadro</button></a>
     </div>
     </section>
     

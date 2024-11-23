@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <title>Vanguardismo Visual</title>
 </head>
 <body>
     <header class="header">
         
-            <h1><a href="index.html"><strong>Vanguardia Visual</strong></a></h1>
+            <h1><a href="/"><strong>Vanguardia Visual</strong></a></h1>
             <p>Bienvenido a tu Galería de Arte preferida!</p>
         </div>
     </header>
@@ -21,28 +21,28 @@
 
         <form id="fotoDescription">
             <label for="artName">¿Cuál es el título de la obra?</label><br>
-            <input type="text" id="artName" name="artName" required maxlength="30"><br>
+            <input type="text" id="artName" name="title" required maxlength="30"><br>
             <label for="painter-Name">¿Quién es el autor de la obra?</label><br>
-            <input type="text" id="painter-Name" name="painter-Name" required maxlength="35"><br>
+            <input type="text" id="painter-Name" name="author" required maxlength="35"><br>
             
             <label for="period">¿A qué período o corriente pertenece la obra?</label><br>
-            <input type="text" id="period" name="period" required maxlength="20"><br>
+            <input type="text" id="period" name="style" required maxlength="20"><br>
 
             <label for="monetary-value">¿Cuánto cuesta la obra?</label><br>
-            <input type="number" id="monetary-value" name="monetary-value" min="0" required >
+            <input type="number" id="monetary-value" name="price" min="0" required >
             <br><br>            
             <label for="fotoDescription">Escribe una descripción</label><br>
-            <textarea id="fotoDescription" name="fotoDescription" rows="6" required></textarea><br>
+            <textarea id="fotoDescription" name="description" rows="6" required></textarea><br>
             
             <label for="painter-Opinion">Escribe la opinión del autor</label><br>
-            <textarea id="painter-Opinion" name="painter-Opinion" rows="6" required></textarea><br>
+            <textarea id="painter-Opinion" name="opinion" rows="6" required></textarea><br>
             
             <label for="fotoDate">¿Cuál es la fecha del cuadro?</label><br>
-            <input type="date" id="fotoDate" name="fotoDate" required><br> <!--añadir fecha máxima (hoy) con script posteriormente-->
+            <input type="date" id="fotoDate" name="date" required><br> <!--añadir fecha máxima (hoy) con script posteriormente-->
                 
             <label for="file-foto">Adjunta el cuadro</label><br>
-            <input type="file" id="file-foto" name="file-foto" required><br>              
-                <button type="button" class="btn btn-danger btn-lg" onclick="location.href='index.html'">Cancelar</button>
+            <input type="file" id="file-foto" name="image" enctype="multipart/form-data" required><br>              
+                <button type="button" class="btn btn-danger btn-lg" onclick="location.href='/'">Cancelar</button>
                 <button type="button" class="btn btn-primary btn-lg">Crear nuevo cuadro</button>
         </form>
     </section>

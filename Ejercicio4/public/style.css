@@ -108,7 +108,7 @@ footer{
     background-image: linear-gradient(
         rgba(0,0,0,0.7), 
         rgba(0,0,0,0.6)),
-        url(Imagenes/background.jpg);
+        url(imagebackground.jpg);
     background-position:center;
     background-repeat: no-repeat;
     background-size: cover;
