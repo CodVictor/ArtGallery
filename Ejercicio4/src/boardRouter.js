@@ -137,15 +137,15 @@ router.get('/new-cuadro.html', (req, res) => {
     res.render('new-cuadro');  // Sirve la vista con el formulario
 });
 
-router.post('/new-cuadro.html', upload.single('image'), (req, res) => {
+router.post('/cuadro/new', upload.single('image'), (req, res) => {
 
-    let { title, style, author, date, price, opinion, description } = req.body;
+    let { title, author, style, price, description, opinion, date } = req.body;
 
     let imageFilename = req.file.filename;
 
-    boardService.addCuadro({ imageFilename, title, style, author, date, price, opinion, description });
+    boardService.addCuadro({ title, author, style, price, description, opinion, date, imageFilename });
 
-    res.render('new-cuadro');
+    res.render('saved-cuadro-msg');
 });
 
 router.get('/info.html/:id', (req, res) => {
@@ -165,7 +165,7 @@ router.get('/cuadro/:id/delete', (req, res) => {
         fs.unlink(UPLOADS_FOLDER +'/' + cuadro.imageFilename);
     }
 
-    res.render('deleted-cuadro-msg.html');
+    res.render('deleted-cuadro-msg');
 });
 
 router.get('/cuadro/:id/image', (req, res) => {

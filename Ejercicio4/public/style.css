@@ -350,4 +350,21 @@ textarea {
     }
 }
 
+/*----Saved-cuadro-msg----*/
+.cuadro-msg p {
+    margin: 100px;
+    font-size: 50px;
+}
 
+.cuadro-msg {
+    background-image: linear-gradient(
+        rgba(0,0,0,0.7), 
+        rgba(0,0,0,0.7)),
+        url(/imagebackground.jpg);
+
+    background-position: center;
+    background-size: cover;
+    color: aliceblue;
+    text-align: center;
+    text-align: center;
+}

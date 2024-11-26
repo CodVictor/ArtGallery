@@ -19,7 +19,7 @@
     <section class="new-cuadro">
             <h2>¿Deseas añadir un nuevo cuadro?</h2>
 
-        <form id="fotoDescription">
+        <form action="cuadro/new" method="post" enctype="multipart/form-data" id="fotoDescription">
             <label for="artName">¿Cuál es el título de la obra?</label><br>
             <input type="text" id="artName" name="title" required maxlength="30"><br>
             <label for="painter-Name">¿Quién es el autor de la obra?</label><br>
@@ -43,7 +43,7 @@
             <label for="file-foto">Adjunta el cuadro</label><br>
             <input type="file" id="file-foto" name="image" enctype="multipart/form-data" required><br>              
                 <button type="button" class="btn btn-danger btn-lg" onclick="location.href='/'">Cancelar</button>
-                <button type="button" class="btn btn-primary btn-lg">Crear nuevo cuadro</button>
+                <button type="submit" value="save" class="btn btn-primary btn-lg">Crear nuevo cuadro</button>
         </form>
     </section>
     </section>
