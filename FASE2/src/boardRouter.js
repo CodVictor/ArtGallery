@@ -157,8 +157,6 @@ router.get('/info.html/:id', (req, res) => {
 });
 
 
-
-
 // VICTOR 
 router.post('/cuadro/:id/delete', async (req, res) => {
     const cuadro = boardService.deleteCuadro(req.params.id);
