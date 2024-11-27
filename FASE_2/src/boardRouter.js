@@ -172,6 +172,10 @@ router.post('/cuadro/:id/delete', async (req, res) => {
 
     res.redirect('/deleted-cuadro-msg');  // Redirige a la página de confirmación
 });
+router.get('/cuadro/:id/image', (req, res) => {
+    let cuadro = boardService.getCuadro(req.params.id);
+    res.download(UPLOADS_FOLDER + '/' + cuadro.imageFilename);
+});
 
 // Mostrar mensaje de cuadro eliminado
 router.get('/deleted-cuadro-msg', (req, res) => {
