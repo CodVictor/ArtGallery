@@ -16,9 +16,8 @@ export function addCuadro(cuadro) {
 export function deleteCuadro(id){
 
     let cuadro = getCuadro(id);
-
-    cuadros.delete(id); //Definido por defecto en los métodos de un Map (en este caso del map cuadros). Se elimina el id y el objeto asociado
-
+    cuadros.delete(id); //Definido por defecto en los métodos de un Map (en este caso del map cuadros). 
+    //Se elimina el id y el objeto asociado
     return cuadro;
 }
 

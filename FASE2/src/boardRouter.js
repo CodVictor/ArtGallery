@@ -8,6 +8,7 @@ import * as boardService from './boardService.js';
 const UPLOADS_FOLDER = 'uploads';
 const DEMO_FOLDER = 'demo';
 
+//RUBEN
 //Copy demo images to upload folder
 //fs.cp(origin, destination) -> lo que pongamos en origin lo copia en destination. 
 fs.cp(DEMO_FOLDER+'/image1.jpg', UPLOADS_FOLDER+'/image1.jpg'); //Concatena la ruta dejando de forma fija DEMO_FOLDER, ya que todas las imagenes vienen de ahi
@@ -155,25 +156,28 @@ router.get('/info.html/:id', (req, res) => {
     res.render('info', { cuadro });
 });
 
-router.get('/cuadro/:id/delete', (req, res) => {
 
-    let cuadro = boardService.deleteCuadro(req.params.id);
+
+
+// VICTOR 
+router.post('/cuadro/:id/delete', async (req, res) => {
+    const cuadro = boardService.deleteCuadro(req.params.id);
 
     if (cuadro) {
-        //Delete image. 
-        //It should be improved processing possible errors
-        fs.unlink(UPLOADS_FOLDER +'/' + cuadro.imageFilename);
+        try {
+            const imageFilename = path.join(UPLOADS_FOLDER, cuadro.imageFilename);
+            await fs.unlink(imageFilename);  // Elimina la imagen del servidor
+        } catch (error) {
+            console.warn(`Error al eliminar la imagen asociada: ${error.message}`);
+        }
     }
 
-    res.render('deleted-cuadro-msg');
+    res.redirect('/deleted-cuadro-msg');  // Redirige a la página de confirmación
 });
 
-router.get('/cuadro/:id/image', (req, res) => {
-
-    let cuadro = boardService.getCuadro(req.params.id);
-
-    res.download(UPLOADS_FOLDER + '/' + cuadro.imageFilename);
-
+// Mostrar mensaje de cuadro eliminado
+router.get('/deleted-cuadro-msg', (req, res) => {
+    res.render('deleted-cuadro-msg');  // Muestra mensaje de éxito
 });
 
 export default router;
