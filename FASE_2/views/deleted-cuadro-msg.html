@@ -6,14 +6,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
-<body class="cuadro-msg">
-    <header class="header">
-        <h1><strong>Vanguardia Visual</strong></h1>
-        <p>Bienvenido a tu Galería de Arte preferida!</p>
-    </header>
+<body class="ocupy-all">
+    <div class="ocupy-all"> <!--la clase ocupy-all ha sido creada para que cuando el contenido de un html es corto, el footer y header se posicionen en los extremos verticales de la página-->
 
-	<p>Tu cuadro ha sido borrado con éxito!</p>
-	<button type="button" class="btn btn-primary btn-lg"><a href="/">Volver a Inicio</a></button>
-    
+    {{>header}}
+
+    <div class="cuadro-msg">
+        <p>Tu cuadro ha sido borrado con éxito!</p>
+        <button type="button" class="btn btn-primary btn-lg"><a href="/">Volver a Inicio</a></button>
+    </div>
+
+    {{>footer}}
+
+    </div>
 </body>
 </html>
