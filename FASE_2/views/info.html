@@ -10,11 +10,7 @@
     <title>Vanguardismo Visual</title>
 </head>
 <body>
-    <header class="header">
-            <h1><a href="/"><strong>Vanguardia Visual</strong></a></h1> 
-            <p>Estás en tu Galería de Arte preferida!</p>
-        </div>
-    </header>
+    {{>header}}
     <section class="aspecto-principal"> <!-- Seccion para definir el background image -->
     <div class="titulo-obras">
         <h1 class="nombre">{{cuadro.title}}</h1>
@@ -120,10 +116,7 @@
     </div>              
 </section>
 
-<footer>
-    <h3>Vanguardia Visual</h3>
-    <p>Has llegado al fin de la página ®</p>
-</footer>
+{{>footer}}
 
 </body>
 </html>
