@@ -139,14 +139,22 @@ router.get('/new-cuadro.html', (req, res) => {
 });
 
 router.post('/cuadro/new', upload.single('image'), (req, res) => {
-
     let { title, author, style, price, description, opinion, date } = req.body;
 
     let imageFilename = req.file.filename;
 
-    boardService.addCuadro({ title, author, style, price, description, opinion, date, imageFilename });
+    const cuadrosArray = Array.from(boardService.cuadros.values()).map(cuadro => cuadro.title);
 
-    res.render('saved-cuadro-msg');
+    if (cuadrosArray.includes(title)) {
+
+        res.redirect('/');
+
+    } else {
+
+        boardService.addCuadro({ title, author, style, price, description, opinion, date, imageFilename });
+
+        res.render('saved-cuadro-msg');
+    }
 });
 
 router.get('/info.html/:id', (req, res) => {
