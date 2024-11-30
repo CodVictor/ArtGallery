@@ -139,22 +139,14 @@ router.get('/new-cuadro.html', (req, res) => {
 });
 
 router.post('/cuadro/new', upload.single('image'), (req, res) => {
+
     let { title, author, style, price, description, opinion, date } = req.body;
 
     let imageFilename = req.file.filename;
 
-    const cuadrosArray = Array.from(boardService.cuadros.values()).map(cuadro => cuadro.title);
+    boardService.addCuadro({ title, author, style, price, description, opinion, date, imageFilename });
 
-    if (cuadrosArray.includes(title)) {
-
-        res.redirect('/');
-
-    } else {
-
-        boardService.addCuadro({ title, author, style, price, description, opinion, date, imageFilename });
-
-        res.render('saved-cuadro-msg');
-    }
+    res.render('saved-cuadro-msg');
 });
 
 router.get('/info.html/:id', (req, res) => {
@@ -165,29 +157,66 @@ router.get('/info.html/:id', (req, res) => {
 });
 
 
-// VICTOR 
-router.post('/cuadro/:id/delete', async (req, res) => {
-    const cuadro = boardService.deleteCuadro(req.params.id);
+// VICTOR BORRAR---------------------------------------------------------
+router.post('/cuadro/:id/delete', (req, res) => {
+    let cuadro = boardService.deleteCuadro(req.params.id);
 
     if (cuadro) {
-        try {
-            const imageFilename = path.join(UPLOADS_FOLDER, cuadro.imageFilename);
-            await fs.unlink(imageFilename);  // Elimina la imagen del servidor
-        } catch (error) {
-            console.warn(`Error al eliminar la imagen asociada: ${error.message}`);
-        }
-    }
+        // Eliminar la imagen asociada
+        fs.unlink(UPLOADS_FOLDER + '/' + cuadro.imageFilename, (err) => {
+            if (err) {
+                console.error('Error al eliminar la imagen:', err);
+            }
+        });
+                }
 
-    res.redirect('/deleted-cuadro-msg');  // Redirige a la página de confirmación
+    res.render('deleted-cuadro-msg');
 });
+
 router.get('/cuadro/:id/image', (req, res) => {
+
     let cuadro = boardService.getCuadro(req.params.id);
+
     res.download(UPLOADS_FOLDER + '/' + cuadro.imageFilename);
 });
 
-// Mostrar mensaje de cuadro eliminado
-router.get('/deleted-cuadro-msg', (req, res) => {
-    res.render('deleted-cuadro-msg');  // Muestra mensaje de éxito
+//VICTOR EDITAR CUADRO
+// Ruta para mostrar la página de edición
+
+import { getCuadro, updateCuadro } from './boardService.js';
+
+// Ruta para mostrar la página de edición
+router.get('/cuadro/:id/edit', (req, res) => {
+    const cuadro = getCuadro(req.params.id);
+    if (cuadro) {
+        res.render('edition-page', { cuadro });
+    } else {
+        res.status(404).send('Cuadro no encontrado');
+    }
 });
+
+// Ruta para manejar la actualización del cuadro
+router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => {
+    const updatedData = {
+        title: req.body.title,
+        description: req.body.description,
+        author: req.body.author,
+        style: req.body.style,
+        price: req.body.price,
+        opinion: req.body.opinion,
+        date: req.body.date,
+        imageFilename: req.file ? req.file.filename : undefined, // Si hay una nueva imagen, se guarda el nombre del archivo
+    };
+
+    const updatedCuadro = updateCuadro(req.params.id, updatedData);
+    if (updatedCuadro) {
+        res.render('changes-confirmed', { cuadro: updatedCuadro }); // Muestra la página de confirmación con el cuadro actualizado
+    } else {
+        res.status(404).send('Cuadro no encontrado');
+    }
+});
+//VICTOR FIN------------------------------------------------------
+
+
 
 export default router;

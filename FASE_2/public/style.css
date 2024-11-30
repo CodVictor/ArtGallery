@@ -14,18 +14,13 @@ header {
 .header a {
     color: black;
 }
+
 footer{
     padding-bottom: 20px;
     padding: 20px;
     text-align: center;
 }
-.ocupy-all{
-    display: grid;
-    min-height: 100dvh;
-    grid-template-rows: auto 1fr auto;
-}
 /*-----INDEX-----*/
-
 .foto-containers {
     background-image: linear-gradient(
         rgba(0,0,0,0.7), 
@@ -255,11 +250,13 @@ textarea {
     width:20%;
     text-align: center;
 }
+
 .bottom-buttons button{
     width: 80%;
     max-width: 100%;
     font-size: 20px;
 }
+
 @media (max-width: 700px){
     .box-primary img{
         width:90%;
@@ -293,12 +290,13 @@ textarea {
     .resenia-text{
         font-size: 15px;
     }
-    .bottom-buttons form{  
+    .bottom-buttons{  
         display: flex;
-        font-size: 83%;
+        font-size: 80%;
     }
-    .bottom-buttons button{    
+    .bottom-buttons *{    
         font-size: 100%;
+        width: 20%;
     }
     
 }
@@ -360,24 +358,22 @@ textarea {
 
 /*----Saved-cuadro-msg----*/
 .cuadro-msg p {
-    margin: 80px;
-    font-size: 45px;
-    padding:30px;
+    margin: 100px;
+    font-size: 50px;
 }
-.cuadro-msg button {
-    margin-bottom: 30px;
-}
+
 .cuadro-msg {
     background-image: linear-gradient(
-        rgba(0,0,0,0.8), 
+        rgba(0,0,0,0.7), 
         rgba(0,0,0,0.7)),
-        url(imagebackground.jpg);
-    background-position:center;
-    background-repeat: no-repeat;
+        url(/imagebackground.jpg);
+
+    background-position: center;
     background-size: cover;
     color: aliceblue;
-    background-attachment: fixed;
     text-align: center;
+    text-align: center;
+    padding: 250px;
 }
 @media (max-width: 700px){
     .cuadro-msg{
