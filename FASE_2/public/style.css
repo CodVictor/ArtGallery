@@ -20,6 +20,11 @@ footer{
     padding: 20px;
     text-align: center;
 }
+.ocupy-all{
+    display:grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
+}
 /*-----INDEX-----*/
 .foto-containers {
     background-image: linear-gradient(
@@ -360,6 +365,7 @@ textarea {
 .cuadro-msg p {
     margin: 100px;
     font-size: 50px;
+    padding: 30px;
 }
 
 .cuadro-msg {
@@ -372,8 +378,6 @@ textarea {
     background-size: cover;
     color: aliceblue;
     text-align: center;
-    text-align: center;
-    padding: 250px;
 }
 @media (max-width: 700px){
     .cuadro-msg{

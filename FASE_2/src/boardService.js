@@ -42,5 +42,8 @@ export function updateCuadro(id, updatedData) {
 
         return cuadro;
     }
+    
     return null; // Devuelve null si el cuadro no existe
 }
+
+//export function getArrayCuadrosTitle(cuadros)
