@@ -144,9 +144,15 @@ router.post('/cuadro/new', upload.single('image'), (req, res) => {
 
     let imageFilename = req.file.filename;
 
-    boardService.addCuadro({ title, author, style, price, description, opinion, date, imageFilename });
+    let arrayCuadros = boardService.getArrayCuadrosTitle(); //Llamo a la funcion para crear el array de titles 
 
-    res.render('saved-cuadro-msg');
+    if (arrayCuadros.includes(title)){
+        res.render('new-cuadro-error');
+    } else{
+        boardService.addCuadro({ title, author, style, price, description, opinion, date, imageFilename });
+        res.render('saved-cuadro-msg');
+
+    }
 });
 
 router.get('/info.html/:id', (req, res) => {

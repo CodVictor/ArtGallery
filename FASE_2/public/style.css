@@ -295,13 +295,21 @@ textarea {
     .resenia-text{
         font-size: 15px;
     }
-    .bottom-buttons{  
+    .bottom-buttons {
         display: flex;
-        font-size: 80%;
+        margin-top: 20px;
+        justify-content:space-around; 
+        margin-bottom: 20px;
     }
-    .bottom-buttons *{    
-        font-size: 100%;
-        width: 20%;
+    .bottom-buttons form{
+        width:20%;
+        text-align: center;
+    }
+    
+    .bottom-buttons button{
+        width: fit-content;
+        max-width: 100%;
+        font-size: 80%;
     }
     
 }
@@ -364,7 +372,7 @@ textarea {
 /*----Saved-cuadro-msg----*/
 .cuadro-msg p {
     margin: 100px;
-    font-size: 50px;
+    font-size: 40px;
     padding: 30px;
 }
 
@@ -385,7 +393,7 @@ textarea {
     }
     .cuadro-msg p {
         margin: 90px;
-        font-size: 32px;
+        font-size: 30px;
         padding: 20px;
     }
     .cuadro-msg button {
