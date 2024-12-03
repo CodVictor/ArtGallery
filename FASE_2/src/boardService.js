@@ -44,3 +44,7 @@ export function updateCuadro(id, updatedData) {
     }
     return null; // Devuelve null si el cuadro no existe
 }
+
+export function getArrayCuadrosTitle(){
+    return Array.from(cuadros.values()).map(cuadro => cuadro.title);    
+}
