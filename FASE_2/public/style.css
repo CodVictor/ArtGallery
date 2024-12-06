@@ -259,6 +259,7 @@ textarea {
 .bottom-buttons button{
     width: fit-content;
     max-width: 100%;
+    width:100%;
     font-size: 80%;
 }
 
