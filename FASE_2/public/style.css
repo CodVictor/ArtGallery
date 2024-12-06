@@ -257,9 +257,9 @@ textarea {
 }
 
 .bottom-buttons button{
-    width: 80%;
+    width: fit-content;
     max-width: 100%;
-    font-size: 20px;
+    font-size: 80%;
 }
 
 @media (max-width: 700px){
@@ -372,7 +372,7 @@ textarea {
 /*----Saved-cuadro-msg----*/
 .cuadro-msg p {
     margin: 100px;
-    font-size: 40px;
+    font-size: 50px;
     padding: 30px;
 }
 

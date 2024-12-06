@@ -125,6 +125,7 @@ boardService.addCuadro({
     description: 'Una mesa de trabajo está cubierta con objetos dispersos: pinceles, tintas, papeles arrugados. La luz suave entra por una ventana, iluminando la escena. La atmósfera es de caos creativo, donde las herramientas y materiales parecen tomar vida propia, reflejando la energía de un proceso artístico.'
 });
 
+//añadir
 const router = express.Router();
 const upload = multer({ dest: UPLOADS_FOLDER })
 
@@ -155,6 +156,7 @@ router.post('/cuadro/new', upload.single('image'), (req, res) => {
     }
 });
 
+
 router.get('/info.html/:id', (req, res) => {
 
     let cuadro = boardService.getCuadro(req.params.id);
@@ -163,13 +165,14 @@ router.get('/info.html/:id', (req, res) => {
 });
 
 
-// VICTOR BORRAR---------------------------------------------------------
-router.post('/cuadro/:id/delete', (req, res) => {
+//borrar
+router.post('/cuadro/:id/delete', async (req, res) => {
     let cuadro = boardService.deleteCuadro(req.params.id);
 
     if (cuadro) {
         // Eliminar la imagen asociada
-        fs.unlink(UPLOADS_FOLDER + '/' + cuadro.imageFilename, (err) => {
+        await fs.unlink(UPLOADS_FOLDER + '/' + cuadro.imageFilename, (err) => { //async y await hacen que se borren las imagenes del server
+            //si reinicias con crtl + s te devuelve las imagenes
             if (err) {
                 console.error('Error al eliminar la imagen:', err);
             }
@@ -186,12 +189,10 @@ router.get('/cuadro/:id/image', (req, res) => {
     res.download(UPLOADS_FOLDER + '/' + cuadro.imageFilename);
 });
 
-//VICTOR EDITAR CUADRO
-// Ruta para mostrar la página de edición
+//editar
 
 import { getCuadro, updateCuadro } from './boardService.js';
 
-// Ruta para mostrar la página de edición
 router.get('/cuadro/:id/edit', (req, res) => {
     const cuadro = getCuadro(req.params.id);
     if (cuadro) {
@@ -201,8 +202,8 @@ router.get('/cuadro/:id/edit', (req, res) => {
     }
 });
 
-// Ruta para manejar la actualización del cuadro
-router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => {
+router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => { //actualización del cuadro
+
     const updatedData = {
         title: req.body.title,
         description: req.body.description,
@@ -221,8 +222,5 @@ router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => {
         res.status(404).send('Cuadro no encontrado');
     }
 });
-//VICTOR FIN------------------------------------------------------
-
-
 
 export default router;
