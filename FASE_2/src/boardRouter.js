@@ -213,13 +213,14 @@ router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => { //actual
         date: req.body.date,
         imageFilename: req.file ? req.file.filename : undefined, // Si hay una nueva imagen, se guarda el nombre del archivo
     };
-
     const updatedCuadro = updateCuadro(req.params.id, updatedData);
-    if (updatedCuadro) {
+    let arrayCuadros = boardService.getArrayCuadrosTitle(); //Llamo a la funcion para crear el array de titles 
+    let { title } = req.body;
+
+    if (arrayCuadros.includes(title)){
+        res.render('error-edition-cuadro-msg');
+    } else{    
         res.render('changes-confirmed', { cuadro: updatedCuadro }); // Muestra la página de confirmación con el cuadro actualizado
-    } else {
-        res.status(404).send('Cuadro no encontrado');
-    }
-});
+}}); 
 
 export default router;
