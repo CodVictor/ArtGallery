@@ -79,7 +79,8 @@ export function getResenias(id){
 }
 export function addResenia(user, text, rating, id){
      let cuadro = cuadros.get(id);
-    review={user, rating, text};
+    let review={user, rating, text};
+    review.order=cuadro.reviews++;
     cuadro.reviewMap.set(review.order, review); 
     console.log(cuadro.reviews);
     }
