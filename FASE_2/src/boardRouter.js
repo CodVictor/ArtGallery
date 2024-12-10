@@ -160,7 +160,7 @@ router.post('/cuadro/new', upload.single('image'), (req, res) => {
 router.get('/info.html/:id', (req, res) => {
 
     let cuadro = boardService.getCuadro(req.params.id);
-
+    let reviewMap = boardService.getResenias(req.params.id);
     res.render('info', { cuadro });
 });
 
@@ -238,7 +238,6 @@ router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => { //actual
 
 }}); 
 
-export default router;
 
 
 //ARIEL editar reseña
@@ -252,7 +251,7 @@ router.get('/cuadro/:id/review/:reviewId/edit', (req,res) => {
 
 
     if (cuadro) {
-        const review = cuadro.reviews.find(r => r.id === req.params.reviewId);
+        const review = cuadro.reviewMap.find(r => r.id === req.params.reviewId);
         if (review) {
             res.render('edit-review', { review, cuadro });
         } else {
@@ -278,7 +277,7 @@ router.post('/cuadro/:id/review/:reviewId/edit', (req, res) => {
     }
 
 
-    const reviewIndex = cuadro.reviews.findIndex(r => r.id === reviewId);
+    const reviewIndex = cuadro.reviewMap.findIndex(r => r.id === reviewId);
     if (reviewIndex === -1) {
         return res.status(404).render('error-page', { message: 'Reseña no encontrada' });
     }
@@ -292,8 +291,20 @@ router.post('/cuadro/:id/review/:reviewId/edit', (req, res) => {
     }
 
 
-    cuadro.reviews[reviewIndex] = { ...cuadro.reviews[reviewIndex], title, content, rating };
+    cuadro.reviewMap[reviewIndex] = { ...cuadro.reviewMap[reviewIndex], title, content, rating };
 
 
     res.render('review-updated', { cuadro });
 });
+router.post('/cuadro/:id/saved-review', (req, res) => {
+    let review = {
+        user: req.body.user,
+        text: req.body.text,
+        rating: req.body.rating
+    }
+    let id = req.params.id;
+    console.log(id);
+    boardService.addResenia(review, id);
+res.redirect("/")
+})
+export default router;
