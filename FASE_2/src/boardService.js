@@ -49,3 +49,27 @@ export function updateCuadro(id, updatedData) {
 export function getArrayCuadrosTitle(){
     return Array.from(cuadros.values()).map(cuadro => cuadro.title);    
 }
+
+//ariel funciones para editar las reseñas
+
+
+export function getReview(cuadroId, reviewId) {
+    const cuadro = cuadros.get(cuadroId);
+    if (!cuadro) return null;
+    return cuadro.reviews.find(r => r.id === reviewId) || null;
+}
+
+
+export function updateReview(cuadroId, reviewId, updatedData) {
+    const cuadro = cuadros.get(cuadroId);
+    if (!cuadro) return null;
+    const reviewIndex = cuadro.reviews.findIndex(r => r.id === reviewId);
+    if (reviewIndex === -1) return null;
+
+
+    const review = cuadro.reviews[reviewIndex];
+    cuadro.reviews[reviewIndex] = { ...review, ...updatedData };
+    return cuadro.reviews[reviewIndex];
+}
+
+

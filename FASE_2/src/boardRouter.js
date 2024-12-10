@@ -239,3 +239,61 @@ router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => { //actual
 }}); 
 
 export default router;
+
+
+//ARIEL editar reseña
+
+
+//get para la ruta del formulario
+
+
+router.get('/cuadro/:id/review/:reviewId/edit', (req,res) => {
+    const cuadro = boardService.getCuadro(req.params.id);
+
+
+    if (cuadro) {
+        const review = cuadro.reviews.find(r => r.id === req.params.reviewId);
+        if (review) {
+            res.render('edit-review', { review, cuadro });
+        } else {
+            res.status(404).render('error-page', { message: 'Reseña no encontrada' });
+        }  
+}
+ else {res.status(404).render('error-page', { message: 'Cuadro no encontrado' });}
+});
+
+
+
+
+//post para guardar cambios en la reseña
+
+
+router.post('/cuadro/:id/review/:reviewId/edit', (req, res) => {
+    const { id, reviewId } = req.params;
+    const cuadro = boardService.getCuadro(id);
+
+
+    if (!cuadro) {
+        return res.status(404).render('error-page', { message: 'Cuadro no encontrado' });
+    }
+
+
+    const reviewIndex = cuadro.reviews.findIndex(r => r.id === reviewId);
+    if (reviewIndex === -1) {
+        return res.status(404).render('error-page', { message: 'Reseña no encontrada' });
+    }
+
+
+    const { title, content, rating } = req.body;
+
+
+    if (!title || !content || !rating || isNaN(rating) || rating < 1 || rating > 5) {
+        return res.render('error-page', { message: 'Uno o mas campos incorrectos' });
+    }
+
+
+    cuadro.reviews[reviewIndex] = { ...cuadro.reviews[reviewIndex], title, content, rating };
+
+
+    res.render('review-updated', { cuadro });
+});
