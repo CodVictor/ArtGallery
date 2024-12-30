@@ -238,7 +238,6 @@ router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => { //actual
 
 }}); 
 
-export default router;
 
 
 //ARIEL editar reseña
@@ -261,8 +260,6 @@ router.get('/cuadro/:id/review/:reviewId/edit', (req,res) => {
 }
  else {res.status(404).render('error-page', { message: 'Cuadro no encontrado' });}
 });
-
-
 
 
 //post para guardar cambios en la reseña
@@ -297,3 +294,23 @@ router.post('/cuadro/:id/review/:reviewId/edit', (req, res) => {
 
     res.render('review-updated', { cuadro });
 });
+
+//RUBEN 
+router.get("/availableTitle", (req, res) => {
+    let title = req.query.title;
+    
+    const startsWithUpperCase = /^[A-Z]/.test(title);
+
+    let arrayPaintings = boardService.getArrayCuadrosTitle(); //Llamo a la funcion para crear el array de titles 
+
+    let availableTitle = (arrayPaintings.indexOf(title) === -1) && (title!=="") && (startsWithUpperCase);
+
+    let response = {
+      available: availableTitle,
+    };
+  
+    res.json(response);
+  });
+
+
+export default router;

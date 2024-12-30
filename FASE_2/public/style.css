@@ -335,6 +335,7 @@ textarea {
     padding: 10px; 
     border-radius: 5px; 
     margin-bottom:20px;
+    outline: none;
 }
 .new-cuadro input[type="number"]{
     margin-bottom: 20px;
@@ -360,6 +361,25 @@ textarea {
 }
 .new-cuadro button{
    margin: 8px;
+}
+.new-cuadro .is-valid{
+    text-align: left;
+    margin-left: 20%;
+    font-size: 15px;
+    margin-top: -5px;
+    margin-bottom:-2px;
+    color:rgba(48, 244, 48, 0.758);
+}
+.new-cuadro .is-invalid{
+    text-align: left;
+    margin-left: 20%;
+    font-size: 15px;
+    margin-top: -5px;
+    margin-bottom:-2px;
+    color:rgba(255, 43, 43, 0.797);
+}
+.new-cuadro .is-invalid, .is-valid p{
+    line-height: 0.1;
 }
 @media (max-width: 700px){
     .new-cuadro{
