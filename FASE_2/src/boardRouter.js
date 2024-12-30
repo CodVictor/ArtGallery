@@ -305,7 +305,6 @@ router.post('/cuadro/:id/saved-review', (req, res) => {
     boardService.addResenia(review, id);
 res.redirect("/")
 })
-export default router;
 
 //RUBEN 
 router.get("/availableTitle", (req, res) => {
