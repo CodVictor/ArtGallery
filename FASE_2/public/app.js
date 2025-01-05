@@ -1,46 +1,75 @@
-//RUBEN
 async function checkPaintingTitle() {
-  //Leo el titulo que esta siendo escrito 
-  let paintingTitle = document.getElementById("artName"); 
+  //obtengo el valor del input título
+  let paintingTitle = document.getElementById("artName");
   let title = paintingTitle.value;
+  //verifico si el titulo está disponible
   const response = await fetch(`/availableTitle?title=${title}`);
   const responseObj = await response.json();
-  
-  //Si el titulo no esta disponible pongo borde rojo, si lo esta lo pongo verde:
-  let message3;
-  if (!responseObj.available){
-    paintingTitle.style.border = "4px red double"; 
-    message3 =  "";
-  }else{
-    paintingTitle.style.border = "4px green double";
-    message3 = "<p>Título disponible</p>";
-  }
+  //obtengo los valores de los div por su id
+  let emptyFeedback = document.getElementById("emptyFeedback");
+  let upperCaseFeedback = document.getElementById("upperCaseFeedback");
+  let validTitle = document.getElementById("validTitle");
+  let repeatedTitle = document.getElementById("repeatedTitle");
 
-  //Compruebo si el titulo esta vacio:
-  let message1;
-  if (title === ""){
-    message1 = "<p>Introduce un título</p>";
-  }else{
-    message1 = "";
-  } 
+  // oculto los mensajes de los div
+  emptyFeedback.style.display = 'none';
+  upperCaseFeedback.style.display = 'none';
+  repeatedTitle.style.display = 'none';
+  validTitle.style.display = 'none';
+  //elimino las clases is-valid e is-invalid del título
+  paintingTitle.classList.remove('is-valid', 'is-invalid');
+  paintingTitle.setCustomValidity("");  // Elimino cualquier mensaje de error establecido previamente
 
-  //Compruebo si el titulo empieza con mayuscula:
-  const startsWithUpperCase = /^[A-Z]/.test(title);
-  let message2;
-  if (!startsWithUpperCase) {
-    message2 = "<p>El título debe empezar con mayúscula</p>";
-  } else { 
-    message2 = "";
-  }
-  
-  //Muestro los mensajes en el div con id=titleAvailability:
-  const messageDiv = document.getElementById("titleAvailability"); //Aqui guardo el 'div' con id=titleAvailability en messageDiv
-  messageDiv.innerHTML = message1 + message2 + message3; //Aqui escribo dentro del div (guardado en messageDiv) el mensaje que había escrito (<p>titulo disponible...)   
- 
-  if (responseObj.available) {
-    messageDiv.className = 'is-valid';  //Clase para "disponible"
+  //Validación personalizada: voy mostrando los mensajes correspondientes y añado la clase correspondiente en cada caso
+  if (title === "") {
+    emptyFeedback.style.display = 'block';
+    paintingTitle.classList.add('is-invalid');
+    paintingTitle.setCustomValidity("El título no puede estar vacío");
+  } else if (!/^[A-Z]/.test(title)) {
+    upperCaseFeedback.style.display = 'block';
+    paintingTitle.classList.add('is-invalid');
+    paintingTitle.setCustomValidity('El título debe comenzar con una letra mayúscula.');
+  } else if (!responseObj.available) {
+    repeatedTitle.style.display = 'block';
+    paintingTitle.classList.add('is-invalid');
+    paintingTitle.setCustomValidity('El título ya está en uso.');
   } else {
-    messageDiv.className = 'is-invalid';  //Clase para "no disponible"
+    validTitle.style.display = 'block';
+    paintingTitle.classList.add('is-valid');
+    paintingTitle.setCustomValidity("");  // Si es válido reseteo el mensaje de error-> esto hace que por defecto se verifique como válido.
+  } 
+  //Información de uso de SetCustomvalidity:
+  //SetCustomValidity()-> Cuando usas esta función, el formulario no se considerará válido hasta que este mensaje sea eliminado (o se establezca como vacío). 
+  //Este método es esencial si estás implementando tu propia lógica de validación en lugar de depender de la validación por defecto del navegador.
+  //Para poder mostrar los mensajes escritos por setCustomValidity, pondría al final: paintingTitle.reportValidity();, pero en este caso no me interesa, ya que,
+  //he implementado los mensajes usando div y las clases de valid-feedback e invalid-feedback
+}
+
+// Función para enviar el formulario
+async function sendForm(event) {
+  event.preventDefault();  // elimino el envío por defecto del formulario
+
+  const form = document.getElementById('creationForm');
+  form.classList.add('was-validated');  // Activar la validación por defecto de Bootstrap
+
+  // Verifico el título antes de enviar el formulario por si ya estuviese en uso en el último momento
+  await checkPaintingTitle();
+
+  const paintingTitle = document.getElementById("artName");
+  if (paintingTitle.checkValidity()) {  // Verificar si el campo título pasa la validación personalizada
+    const formData = new FormData(event.target);
+    const response = await fetch(`/cuadro/new`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      alert("Cuadro añadido con éxito!");
+      window.location.href = "/";
+    } else {
+      alert("Error al añadir el cuadro. Rellena todos los campos correctamente.");
+    }
+  } else {
+    alert("Hay errores en el formulario. Por favor, revisa los campos.");
   }
-  
 }

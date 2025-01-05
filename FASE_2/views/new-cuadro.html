@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="../faviconVVISUAL.png">
     <link rel="stylesheet" href="../style.css">
     <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <title>Vanguardismo Visual</title>
 </head>
 <body>
@@ -16,34 +17,62 @@
     <section class="new-cuadro">
             <h2>¿Deseas añadir un nuevo cuadro?</h2>
 
-        <form action="cuadro/new" method="post" enctype="multipart/form-data" id="fotoDescription" novalidate>
+        <form method="post" id="creationForm" class="needs-validation" onsubmit="sendForm(event)" novalidate>
+            <div class="mb-3"> 
+                <label for="artName" class="form-label">¿Cuál es el título de la obra?</label><br>
+                <input type="text" class="form-control" id="artName" oninput="checkPaintingTitle()" name="title" maxlength="30" required/>
+                <div class="invalid-feedback" id="upperCaseFeedback">El título debe empezar con mayúscula.</div>
+                <div class="invalid-feedback" id="repeatedTitle">El título ya está en uso.</div>
+                <div class="invalid-feedback" id="emptyFeedback">El título no puede estar vacío.</div>
+                <div class="valid-feedback" id="validTitle">Título disponible</div>
+            </div>
             
-            <label for="artName">¿Cuál es el título de la obra?</label><br>
-            <input type="text" id="artName" oninput="checkPaintingTitle()" name="title" required maxlength="30">
-            <div id="titleAvailability"></div>
+            <div class="mb-3"> 
+                <label for="painter-Name">¿Quién es el autor de la obra?</label><br>
+                <input type="text" class="form-control" id="painter-Name" name="author" required maxlength="35"/>
+                <div class="invalid-feedback" id="painterNameFeedback">El nombre del autor no puede estar vacío.</div>
+            </div>
 
-            <label for="painter-Name">¿Quién es el autor de la obra?</label><br>
-            <input type="text" id="painter-Name" name="author" required maxlength="35"><br>
-            
-            <label for="period">¿A qué período o corriente pertenece la obra?</label><br>
-            <input type="text" id="period" name="style" required maxlength="20"><br>
+            <div class="mb-3"> 
+                <label for="period">¿A qué período o corriente pertenece la obra?</label><br>
+                <input type="text" class="form-control" id="period" name="style" required maxlength="20"/>
+                <div class="invalid-feedback" id="periodFeedback">El período no puede estar vacío.</div>
+            </div>
 
-            <label for="monetary-value">¿Cuánto cuesta la obra?</label><br>
-            <input type="number" id="monetary-value" name="price" min="0" required >
-            <br><br>            
-            <label for="foto-Description">Escribe una descripción</label><br>
-            <textarea id="foto-Description" name="description" rows="6" required></textarea><br>
-            
-            <label for="painter-Opinion">Escribe la opinión del autor</label><br>
-            <textarea id="painter-Opinion" name="opinion" rows="6" required></textarea><br>
-            
-            <label for="fotoDate">¿Cuál es la fecha del cuadro?</label><br>
-            <input type="date" id="fotoDate" name="date" required><br> <!--añadir fecha máxima (hoy) con script posteriormente-->
+            <div class="mb-3">
+                <label for="monetary-value">¿Cuánto cuesta la obra?</label><br>
+                <input type="number" class="form-control" id="monetary-value" name="price" min="0" required />
+                <div class="invalid-feedback" id="monetaryValueFeedback">El precio de la obra no puede estar vacío.</div>
+            </div>
                 
-            <label for="file-foto">Adjunta el cuadro</label><br>
-            <input type="file" id="file-foto" name="image" enctype="multipart/form-data" required><br>              
+            <div class="mb-3">
+                <label for="foto-Description">Escribe una descripción</label><br>
+                <textarea id="foto-Description" class="form-control" name="description" rows="6" required></textarea>
+                <div class="invalid-feedback" id="descriptionFeedback">La descripción no puede estar vacía.</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="painter-Opinion">Escribe la opinión del autor</label><br>
+                <textarea id="painter-Opinion" class="form-control" name="opinion" rows="6" required></textarea>
+                <div class="invalid-feedback" id="opinionFeedback">La opinión del autor no puede estar vacía.</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="fotoDate">¿Cuál es la fecha del cuadro?</label><br>
+                <input type="date" id="fotoDate" class="form-control" name="date" required /> <!--añadir fecha máxima (hoy) con script posteriormente-->
+                <div class="invalid-feedback" id="dateFeedback">La fecha no puede estar vacía.</div>
+
+            </div>
+            
+            <div class="mb-3">
+                <label for="file-foto">Adjunta el cuadro</label><br>
+                <input type="file" id="file-foto" class="form-control" name="image" enctype="multipart/form-data" required>   
+                <div class="invalid-feedback" id="imageFeedback">Por favor, añade la imagen del cuadro.</div>
+            </div>
+            <div class="mb-3">          
                 <button type="button" class="btn btn-danger btn-lg" onclick="location.href='/'">Cancelar</button>
-                <button type="submit" value="save" class="btn btn-primary btn-lg">Crear nuevo cuadro</button>
+                <button type="submit" id="submitButton" value="save" class="btn btn-primary btn-lg">Crear nuevo cuadro</button>
+            </div>
         </form>
     </section>
     </section>
