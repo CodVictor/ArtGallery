@@ -124,6 +124,13 @@ boardService.addCuadro({
     opinion: 'La creación artística nunca es un proceso ordenado, sino que surge del caos. Quise mostrar la belleza que puede surgir de la desorganización, esa energía caótica que da paso a nuevas ideas.',
     description: 'Una mesa de trabajo está cubierta con objetos dispersos: pinceles, tintas, papeles arrugados. La luz suave entra por una ventana, iluminando la escena. La atmósfera es de caos creativo, donde las herramientas y materiales parecen tomar vida propia, reflejando la energía de un proceso artístico.'
 });
+for (let x=0; x<10; x++){
+    boardService.addResenia({ 
+        user: "Juan Pérez",
+        text: "Bonita obra que muestra las inseguridades del autor y de la gente de la época mediante el simbolismo más abstracto",
+        rating: "4",
+    }, x.toString());
+    }
 
 //añadir
 const router = express.Router();
@@ -165,7 +172,7 @@ router.get('/info.html/:id', (req, res) => {
 
     let cuadro = boardService.getCuadro(req.params.id);
     let reviewMap = boardService.getResenias(req.params.id);
-    res.render('info', { cuadro });
+    res.render('info', { cuadro, reviewMap});
 });
 
 
@@ -246,10 +253,6 @@ router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => { //actual
 
 //ARIEL editar reseña
 
-
-//get para la ruta del formulario
-
-
 router.get('/cuadro/:id/review/:reviewId/edit', (req,res) => {
     const cuadro = boardService.getCuadro(req.params.id);
 
@@ -264,51 +267,49 @@ router.get('/cuadro/:id/review/:reviewId/edit', (req,res) => {
 }
  else {res.status(404).render('error-page', { message: 'Cuadro no encontrado' });}
 });
-
-
 //post para guardar cambios en la reseña
 
-
-router.post('/cuadro/:id/review/:reviewId/edit', (req, res) => {
-    const { id, reviewId } = req.params;
-    const cuadro = boardService.getCuadro(id);
-
-
-    if (!cuadro) {
-        return res.status(404).render('error-page', { message: 'Cuadro no encontrado' });
-    }
-
-
-    const reviewIndex = cuadro.reviewMap.findIndex(r => r.id === reviewId);
-    if (reviewIndex === -1) {
-        return res.status(404).render('error-page', { message: 'Reseña no encontrada' });
-    }
-
-
-    const { title, content, rating } = req.body;
-
-
-    if (!title || !content || !rating || isNaN(rating) || rating < 1 || rating > 5) {
-        return res.render('error-page', { message: 'Uno o mas campos incorrectos' });
-    }
-
-
-    cuadro.reviewMap[reviewIndex] = { ...cuadro.reviewMap[reviewIndex], title, content, rating };
-
-
-    res.render('review-updated', { cuadro });
-});
 router.post('/cuadro/:id/saved-review', (req, res) => {
+    const cuadro = boardService.getCuadro(req.params.id);
     let review = {
         user: req.body.user,
         text: req.body.text,
-        rating: req.body.rating
+        rating: req.body.rating,
     }
-    let id = req.params.id;
-    console.log(id);
+    boardService.addResenia(review, req.params.id);
+res.render("confirm-review", {cuadro})
+});
+
+router.get('/cuadro/:id/delete-review/:reviewid', (req, res) => {
+    const reviewId = req.params.reviewid;
+    const cuadro = boardService.getCuadro(req.params.id);
+    let review =boardService.getResenia(req.params.id, reviewId)
+    console.log(review.user);
+    boardService.deleteResenia(req.params.id, reviewId);
+res.render("confirm-delete-review", {cuadro});
+});
+
+router.get('/cuadro/:id/edit-review/:reviewid/', (req, res) => {
+    const cuadro = boardService.getCuadro(req.params.id);
+    const reviewId = req.params.reviewid;
+    res.render("edit-review", {cuadro, reviewId})
+});
+
+router.post('/cuadro/:id/confirm-edit-review/:reviewid/', (req, res) => {
+    const reviewId  = req.params.reviewid;
+    const id =req.params.id;
+    const cuadro = boardService.getCuadro(id);
+
+    let review = {
+        user: req.body.user,
+        text: req.body.text,
+        rating: req.body.rating,
+    }
+    boardService.deleteResenia(id, reviewId);
     boardService.addResenia(review, id);
-res.redirect("/")
-})
+
+    res.redirect('/info.html/'+ id);
+});
 
 //RUBEN 
 router.get("/availableTitle", (req, res) => {

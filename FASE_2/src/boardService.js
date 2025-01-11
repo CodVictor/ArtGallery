@@ -55,14 +55,19 @@ export function getArrayCuadrosTitle(){
 //ariel funciones para editar las reseñas
 
 
-export function getReview(cuadroId, reviewId) {
-    const cuadro = cuadros.get(cuadroId);
+export function getResenia(id, reviewId) {
+    const cuadro = cuadros.get(id);
+    
     if (!cuadro) return null;
-    return cuadro.reviewMap.find(r => r.id === reviewId) || null;
+    else {
+        let review =cuadro.reviewMap.get(reviewId)
+        console.log(cuadro.reviewMap.get(reviewId));
+        return review;
+    }
 }
 
 
-export function updateReview(cuadroId, order, updatedData) {
+export function updateResennia(cuadroId, order, updatedData) {
     const cuadro = cuadros.get(cuadroId);
     if (!cuadro) return null;
     const reviewIndex = cuadro.reviewMap.findIndex(r => r.id === order);
@@ -77,17 +82,17 @@ export function getResenias(id){
     let cuadro= cuadros.get(id);
     return[...cuadro.reviewMap.values()];
 }
-export function addResenia(user, text, rating, id){
+export function addResenia(review, id){
      let cuadro = cuadros.get(id);
-    let review={user, rating, text};
-    review.order=cuadro.reviews++;
+     cuadro.reviews++
+    review.order=cuadro.reviews.toString();
     cuadro.reviewMap.set(review.order, review); 
-    console.log(cuadro.reviews);
     }
 export function deleteResenia(id, order){
     let cuadro = cuadros.get(id); 
-        cuadro.reviewMap.delete(order)
-        //por que querria devolver un objeto vacio?
+    let review=cuadro.reviewMap.get(order)
+    cuadro.reviews--;
+       cuadro.reviewMap.delete(order);
         }
 export function deleteResenias(id){  
     let cuadro = cuadros.get(id);
