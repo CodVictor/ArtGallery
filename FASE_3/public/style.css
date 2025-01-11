@@ -198,6 +198,11 @@ a {
     border-radius: 10px;
     padding-bottom: 50px;
 }
+
+.resenia{
+    margin-bottom: 15px;
+}
+
 .resenia-header {
     display: flex;
     justify-content: space-between;
@@ -400,7 +405,7 @@ textarea {
     box-sizing: border-box;
 }
 .new-cuadro button{
-   margin: 8px;
+    margin: 8px;
 }
 .new-cuadro .valid-feedback{
     text-align: center;
