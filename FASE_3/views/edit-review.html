@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Reseña</title>
+</head>
+<body>
+    <h1>Editar Reseña</h1>
+    <form action="/cuadro/{{cuadro.id}}/review/{{review.id}}/edit" method="POST">
+        <label for="title">Título:</label>
+        <input type="text" name="title" id="title" value="{{review.title}}" required>
+        <br>
+        <label for="content">Contenido:</label>
+        <textarea name="content" id="content" required>{{review.content}}</textarea>
+        <br>
+        <label for="rating">Calificación (1-5):</label>
+        <input type="number" name="rating" id="rating" value="{{review.rating}}" min="1" max="5" required>
+        <br>
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="/">Volver a la página principal</a>
+</body>
+</html>

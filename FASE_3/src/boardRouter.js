@@ -135,7 +135,6 @@ router.get('/', (req, res) => {
         cuadros: boardService.getCuadros()
     });
 });
-
 router.get('/new-cuadro.html', (req, res) => {
     res.render('new-cuadro');  // Sirve la vista con el formulario
 });
@@ -148,13 +147,17 @@ router.post('/cuadro/new', upload.single('image'), (req, res) => {
 
     let arrayCuadros = boardService.getArrayCuadrosTitle(); //Llamo a la funcion para crear el array de titles 
 
-    if (arrayCuadros.includes(title)){
-        res.render('new-cuadro-error');
-    } else{
-        boardService.addCuadro({ title, author, style, price, description, opinion, date, imageFilename });
-        res.render('saved-cuadro-msg');
+    const startsWithUpperCase = /^[A-Z]/.test(title);
 
+    if (arrayCuadros.includes(title)||!startsWithUpperCase){
+        return res.status(400).json('Título no disponible');
+    } else if (title === "" || author === "" || style === "" || price === "" || description === "" || opinion === "" || date === "" || imageFilename === ""){
+        return res.status(400).json('Todos los campos son obligatorios');
+    } else{
+        const post = boardService.addCuadro({ title, author, style, price, description, opinion, date, imageFilename });
+        return res.status(200).json(post);   
     }
+
 });
 
 
