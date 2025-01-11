@@ -16,10 +16,13 @@ header {
 }
 
 footer{
-    padding-bottom: 20px;
-    padding: 20px;
-    text-align: center;
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        text-align: center;
 }
+
 .ocupy-all{
     display:grid;
     min-height: 100dvh;
@@ -38,12 +41,13 @@ footer{
     color: aliceblue;
     text-align: center;
     text-align: center;
+    min-height: 70vh
 }
 .foto-containers img {
     width: 100%; 
     height: auto; 
-    max-width: 150px; 
-    padding-top: 20px;
+    max-width: 215px; 
+    padding-top: 40px;
 }
 .foto-containers h3 {
     text-align: center;
@@ -55,10 +59,33 @@ footer{
     margin-top: 30px;
     padding: auto; 
 }
+
 .boton-container {
     padding-bottom: 40px;
 }
 
+.bottom-buttons-index { 
+    display:inline-flex;
+    justify-content: space-around; /* Distribuye los botones, ajusta esto si prefieres otro alineamiento */
+    margin-bottom: 10px;
+    gap: 10px;
+    margin-top: 60px;
+}
+
+.bottom-buttons-index button {
+    width: fit-content;
+    max-width: 100%;
+    font-size: 100%;
+    margin: 0;
+    padding: 8px 15px; /* Reduce el padding para que los botones no sean tan grandes */
+    gap: 5px; /* Reduce el espacio dentro de los botones si hay más de un ítem en su interior */
+}
+
+
+/* Clase que se añadirá cuando se oculte el botón "Cargar Más Arte!" */
+.bottom-buttons-index.center {
+    justify-content: center; /* Centra los botones */
+}
 /*-----INFO-----*/
 
 .foto-info-container h3 {

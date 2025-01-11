@@ -1,7 +1,10 @@
 const cuadros = new Map();
 let nextId = 0;
+let totalCuadros = 10; //contador para AJAX (INDEX)
 
-//En la function addCuadro añado la parte en la que compruebo que el cuadro que voy a añadir no se haya introducido ya, comparando el titulo.
+//En la function addCuadro añado la parte en la que compruebo que 
+// el cuadro que voy a añadir no se haya 
+// introducido ya, comparando el titulo.
 export function addCuadro(cuadro) {
     if (cuadros.has(cuadro.title)){
         console.log("El cuadro que intentas añadir ya ha sido añadido!")
@@ -13,7 +16,14 @@ export function addCuadro(cuadro) {
         cuadros.set(cuadro.id, cuadro); //Set permite agregar una pareja (en este caso id - objeto) a un map. 
                                     //En este caso, agregamos el id del cuadro asociado a un objeto cuadro dentro del mapa cuadros.
     }
+    totalCuadros++; // va haciendo recuento de numero de cuadros -> AJAX
 }
+
+// Función para obtener el valor actual de totalCuadros ->AJAX
+export function getTotalCuadros() {
+    return totalCuadros;
+}
+
 
 export function deleteCuadro(id){
     let cuadro = getCuadro(id);
@@ -78,7 +88,7 @@ export function getResenias(id){
     return[...cuadro.reviewMap.values()];
 }
 export function addResenia(user, text, rating, id){
-     let cuadro = cuadros.get(id);
+    let cuadro = cuadros.get(id);
     let review={user, rating, text};
     review.order=cuadro.reviews++;
     cuadro.reviewMap.set(review.order, review); 
@@ -98,3 +108,15 @@ export function deleteResenias(id){
         }
     }
 
+
+//victor AJAX
+// funcion que va a mostrar los cuadros de 3 en 3
+export function getCuadrosAJAX(from, to) {
+    let values = [...cuadros.values()];
+
+    if (from !== undefined) {
+        return values.slice(from, to);
+    } else {
+        return values; 
+    }
+}

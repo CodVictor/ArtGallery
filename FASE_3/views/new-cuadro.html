@@ -21,53 +21,60 @@
             <div class="mb-3"> 
                 <label for="artName" class="form-label">¿Cuál es el título de la obra?</label><br>
                 <input type="text" class="form-control" id="artName" oninput="checkPaintingTitle()" name="title" maxlength="30" required/>
-                <div class="invalid-feedback" id="upperCaseFeedback">El título debe empezar con mayúscula.</div>
-                <div class="invalid-feedback" id="repeatedTitle">El título ya está en uso.</div>
-                <div class="invalid-feedback" id="emptyFeedback">El título no puede estar vacío.</div>
+                <div class="invalid-feedback" id="upperCaseFeedback">El título debe empezar con mayúscula</div>
+                <div class="invalid-feedback" id="repeatedTitle">El título ya está en uso</div>
+                <div class="invalid-feedback" id="emptyFeedback">El título no puede estar vacío</div>
                 <div class="valid-feedback" id="validTitle">Título disponible</div>
             </div>
             
             <div class="mb-3"> 
                 <label for="painter-Name">¿Quién es el autor de la obra?</label><br>
                 <input type="text" class="form-control" id="painter-Name" name="author" required maxlength="35"/>
-                <div class="invalid-feedback" id="painterNameFeedback">El nombre del autor no puede estar vacío.</div>
+                <div class="invalid-feedback" id="painterNameFeedback">El nombre del autor no puede estar vacío</div>
             </div>
 
             <div class="mb-3"> 
                 <label for="period">¿A qué período o corriente pertenece la obra?</label><br>
                 <input type="text" class="form-control" id="period" name="style" required maxlength="20"/>
-                <div class="invalid-feedback" id="periodFeedback">El período no puede estar vacío.</div>
+                <div class="invalid-feedback" id="periodFeedback">El período no puede estar vacío</div>
             </div>
 
             <div class="mb-3">
-                <label for="monetary-value">¿Cuánto cuesta la obra?</label><br>
-                <input type="number" class="form-control" id="monetary-value" name="price" min="0" required />
-                <div class="invalid-feedback" id="monetaryValueFeedback">El precio de la obra no puede estar vacío.</div>
+                <label for="price">¿Cuánto cuesta la obra?</label><br>
+                <input type="number" class="form-control" id="price" name="price" min="0" required />
+                <div class="invalid-feedback" id="monetaryValueFeedback">El precio de la obra no puede estar vacío</div>
+                <div id="minusceroFeedback" class="invalid-feedback">El precio no puede ser inferior a 0</div>
+                <div id="validPrice" class="valid-feedback">Descripción válida</div>
             </div>
                 
             <div class="mb-3">
-                <label for="foto-Description">Escribe una descripción</label><br>
-                <textarea id="foto-Description" class="form-control" name="description" rows="6" required></textarea>
-                <div class="invalid-feedback" id="descriptionFeedback">La descripción no puede estar vacía.</div>
+                <label for="description">Escribe una descripción</label><br>
+                <textarea id="description" class="form-control" name="description" rows="6" required></textarea>
+                <div class="invalid-feedback" id="descriptionFeedback">La descripción no puede estar vacía</div>
+                <div id="shortDescriptionFeedback" class="invalid-feedback">La descripción debe tener al menos 10 caracteres</div>
+                <div id="longDescriptionFeedback" class="invalid-feedback">La descripción no puede tener más de 500 caracteres</div>
+                <div id="validDescription" class="valid-feedback">Descripción válida</div>
             </div>
             
             <div class="mb-3">
                 <label for="painter-Opinion">Escribe la opinión del autor</label><br>
                 <textarea id="painter-Opinion" class="form-control" name="opinion" rows="6" required></textarea>
-                <div class="invalid-feedback" id="opinionFeedback">La opinión del autor no puede estar vacía.</div>
+                <div class="invalid-feedback" id="opinionFeedback">La opinión del autor no puede estar vacía</div>
             </div>
             
             <div class="mb-3">
-                <label for="fotoDate">¿Cuál es la fecha del cuadro?</label><br>
-                <input type="date" id="fotoDate" class="form-control" name="date" required /> <!--añadir fecha máxima (hoy) con script posteriormente-->
-                <div class="invalid-feedback" id="dateFeedback">La fecha no puede estar vacía.</div>
+                <label for="date">¿Cuál es la fecha del cuadro?</label><br>
+                <input type="date" id="date" class="form-control" name="date" required /> <!--añadir fecha máxima (hoy) con script posteriormente-->
+                <div class="invalid-feedback" id="dateFeedback">La fecha no puede estar vacía</div>
+                <div id="futureDateFeedback" class="invalid-feedback">La fecha debe ser anterior a la fecha de hoy</div>
+                <div id="validDate" class="valid-feedback">Fecha válida</div>
 
             </div>
             
             <div class="mb-3">
                 <label for="file-foto">Adjunta el cuadro</label><br>
                 <input type="file" id="file-foto" class="form-control" name="image" enctype="multipart/form-data" required>   
-                <div class="invalid-feedback" id="imageFeedback">Por favor, añade la imagen del cuadro.</div>
+                <div class="invalid-feedback" id="imageFeedback">Por favor, añade la imagen del cuadro</div>
             </div>
             <div class="mb-3">          
                 <button type="button" class="btn btn-danger btn-lg" onclick="location.href='/'">Cancelar</button>
