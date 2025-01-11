@@ -172,6 +172,9 @@ a {
     border-radius: 10px;
     padding-bottom: 50px;
 }
+.resenia{
+    margin-bottom: 15px;
+}
 .resenia-header {
     display: flex;
     justify-content: space-between;
@@ -192,7 +195,6 @@ a {
     color:orange;
     margin-left: 5px;
 }
-
 
 .resenia-text {
     margin-top: 10px;
