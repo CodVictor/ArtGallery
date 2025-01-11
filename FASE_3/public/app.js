@@ -81,8 +81,8 @@ async function sendForm(event) {
 async function checkPaintingTitleEdit() {
   //obtengo el valor del input título
   let paintingTitle = document.getElementById("artName");
-  let title = paintingTitle.value;
-  const titleDefault = paintingTitle.defaultValue; // Esto obtiene el valor por defecto del input
+  let title = paintingTitle.value.trim();
+  const titleDefault = paintingTitle.defaultValue.trim(); // Esto obtiene el valor por defecto del input
   //verifico si el titulo está disponible
   const response = await fetch(`/availableTitle?title=${title}`);
   const responseObj = await response.json();
