@@ -206,12 +206,11 @@ router.get('/cuadro/:id/edit', (req, res) => {
     }
 });
 
-router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => { //actualización del cuadro
+router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => {
+    let arrayCuadros = boardService.getArrayCuadrosTitle(); // Llamo a la función para crear el array de titles
 
-    let arrayCuadros = boardService.getArrayCuadrosTitle(); //Llamo a la funcion para crear el array de titles 
-
-    const cuadroOriginal = boardService.getCuadro(req.params.id); 
-    const oldTitle = cuadroOriginal.title; // Título original antes de los cambios
+    const originalPainting = boardService.getCuadro(req.params.id); 
+    const oldTitle = originalPainting.title; // Obtener el título original antes de los cambios
 
     const updatedData = {
         title: req.body.title,
@@ -224,23 +223,29 @@ router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => { //actual
         imageFilename: req.file ? req.file.filename : undefined, // Si hay una nueva imagen, se guarda el nombre del archivo
     };
 
-    let { title } = req.body;
+    let { title } = req.body; // Obtener el título nuevo del cuerpo
+    const startsWithUpperCase = /^[A-Z]/.test(title);
 
-    let newTitle = req.body.title;
-
-    if (oldTitle === newTitle){
-        const updatedCuadro = updateCuadro(req.params.id, updatedData);
-        res.render('changes-confirmed'); // Muestra la página de confirmación con el cuadro actualizado
-        return;
+    if (title !== oldTitle && arrayCuadros.includes(title)) {
+        return res.status(400).json('Título no disponible');
+    } else if (!startsWithUpperCase) {
+        return res.status(400).json('El título debe empezar con letra mayúscula!');
+    } else if (
+        updatedData.title === "" || 
+        updatedData.author === "" || 
+        updatedData.style === "" || 
+        updatedData.price === "" || 
+        updatedData.description === "" || 
+        updatedData.opinion === "" || 
+        updatedData.date === ""
+    ) {
+        return res.status(400).json('Todos los campos son obligatorios!');
+    } else {
+        const post = boardService.updateCuadro(req.params.id, updatedData);
+        return res.status(200).json(post);
     }
+});
 
-    if (arrayCuadros.includes(title)){
-        res.render('error-edition-cuadro-msg');
-    } else{    
-        const updatedCuadro = updateCuadro(req.params.id, updatedData);
-        res.render('changes-confirmed', { cuadro: updatedCuadro }); // Muestra la página de confirmación con el cuadro actualizado
-
-}}); 
 
 
 
