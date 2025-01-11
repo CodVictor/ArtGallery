@@ -124,42 +124,31 @@ boardService.addCuadro({
     opinion: 'La creación artística nunca es un proceso ordenado, sino que surge del caos. Quise mostrar la belleza que puede surgir de la desorganización, esa energía caótica que da paso a nuevas ideas.',
     description: 'Una mesa de trabajo está cubierta con objetos dispersos: pinceles, tintas, papeles arrugados. La luz suave entra por una ventana, iluminando la escena. La atmósfera es de caos creativo, donde las herramientas y materiales parecen tomar vida propia, reflejando la energía de un proceso artístico.'
 });
-<<<<<<< HEAD
-<<<<<<<< HEAD:FASE_3/src/boardRouter.js
+
 
 //--------------AÑADIR--------------
-========
-=======
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
+
 for (let x=0; x<10; x++){
     boardService.addResenia({ 
         user: "Juan Pérez",
         text: "Bonita obra que muestra las inseguridades del autor y de la gente de la época mediante el simbolismo más abstracto",
         rating: "4",
     }, x.toString());
-    }
-<<<<<<< HEAD
-//añadir
->>>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703:FASE_2/src/boardRouter.js
-=======
+};
 
-//añadir
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
-const router = express.Router();
+
+    const router = express.Router();
 const upload = multer({ dest: UPLOADS_FOLDER })
 
 router.get('/', (req, res) => {
-
-<<<<<<< HEAD
-    const cuadros = getCuadrosAJAX(0, 3); // para que muestren los primeros 3 solamente
+    const cuadros = getCuadrosAJAX(0, 3) // para que muestren los primeros 3 solamente
     res.render('index', {
-        cuadros, 
-=======
-    res.render('index', {
-        cuadros: boardService.getCuadros()
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
+        cuadros
     });
 });
+
+
+
 router.get('/new-cuadro.html', (req, res) => {
     res.render('new-cuadro');  // Sirve la vista con el formulario
 });
@@ -185,10 +174,7 @@ router.post('/cuadro/new', upload.single('image'), (req, res) => {
 
 });
 
-<<<<<<< HEAD
-=======
 
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 router.get('/info.html/:id', (req, res) => {
 
     let cuadro = boardService.getCuadro(req.params.id);
@@ -197,11 +183,9 @@ router.get('/info.html/:id', (req, res) => {
 });
 
 
-<<<<<<< HEAD
+
 //-------------BORRAR--------------
-=======
-//borrar
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
+
 router.post('/cuadro/:id/delete', async (req, res) => {
     let cuadro = boardService.deleteCuadro(req.params.id);
 
@@ -225,12 +209,7 @@ router.get('/cuadro/:id/image', (req, res) => {
     res.download(UPLOADS_FOLDER + '/' + cuadro.imageFilename);
 });
 
-<<<<<<< HEAD
 //--------------EDITAR--------------
-=======
-//editar
-
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 import { getCuadro, updateCuadro } from './boardService.js';
 
 router.get('/cuadro/:id/edit', (req, res) => {
@@ -242,20 +221,12 @@ router.get('/cuadro/:id/edit', (req, res) => {
     }
 });
 
-<<<<<<< HEAD
 router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => { //actualización del cuadro
 
     let arrayCuadros = boardService.getArrayCuadrosTitle(); //Llamo a la funcion para crear el array de titles 
 
     const cuadroOriginal = boardService.getCuadro(req.params.id); 
     const oldTitle = cuadroOriginal.title; // Título original antes de los cambios
-=======
-router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => {
-    let arrayCuadros = boardService.getArrayCuadrosTitle(); // Llamo a la función para crear el array de titles
-
-    const originalPainting = boardService.getCuadro(req.params.id); 
-    const oldTitle = originalPainting.title; // Obtener el título original antes de los cambios
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 
     const updatedData = {
         title: req.body.title,
@@ -268,7 +239,6 @@ router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => {
         imageFilename: req.file ? req.file.filename : undefined, // Si hay una nueva imagen, se guarda el nombre del archivo
     };
 
-<<<<<<< HEAD
     let { title } = req.body;
 
     let newTitle = req.body.title;
@@ -286,41 +256,12 @@ router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => {
         res.render('changes-confirmed', { cuadro: updatedCuadro }); // Muestra la página de confirmación con el cuadro actualizado
 
 }}); 
-=======
-    let { title } = req.body; // Obtener el título nuevo del cuerpo
-    const startsWithUpperCase = /^[A-Z]/.test(title);
-
-    if (title !== oldTitle && arrayCuadros.includes(title)) {
-        return res.status(400).json('Título no disponible');
-    } else if (!startsWithUpperCase) {
-        return res.status(400).json('El título debe empezar con letra mayúscula!');
-    } else if (
-        updatedData.title === "" || 
-        updatedData.author === "" || 
-        updatedData.style === "" || 
-        updatedData.price === "" || 
-        updatedData.description === "" || 
-        updatedData.opinion === "" || 
-        updatedData.date === ""
-    ) {
-        return res.status(400).json('Todos los campos son obligatorios!');
-    } else {
-        const post = boardService.updateCuadro(req.params.id, updatedData);
-        return res.status(200).json(post);
-    }
-});
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 
 
 
 
-<<<<<<< HEAD
 //--------------ARIEL EDITAR RESEÑA--------------
 //--------------get para la ruta del formulario--------------
-=======
-//ARIEL editar reseña
-
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 router.get('/cuadro/:id/review/:reviewId/edit', (req,res) => {
     const cuadro = boardService.getCuadro(req.params.id);
 
@@ -333,11 +274,9 @@ router.get('/cuadro/:id/review/:reviewId/edit', (req,res) => {
             res.status(404).render('error-page', { message: 'Reseña no encontrada' });
         }  
 }
-<<<<<<< HEAD
     else {res.status(404).render('error-page', { message: 'Cuadro no encontrado' });}
 });
 
-<<<<<<<< HEAD:FASE_3/src/boardRouter.js
 //--------------post para guardar cambios en la reseña--------------
 
 router.post('/cuadro/:id/review/:reviewId/edit', (req, res) => {
@@ -369,16 +308,8 @@ router.post('/cuadro/:id/review/:reviewId/edit', (req, res) => {
 
     res.render('review-updated', { cuadro });
 });
-========
 
 //post para guardar cambios en la reseña
->>>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703:FASE_2/src/boardRouter.js
-=======
- else {res.status(404).render('error-page', { message: 'Cuadro no encontrado' });}
-});
-//post para guardar cambios en la reseña
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
-
 router.post('/cuadro/:id/saved-review', (req, res) => {
     const cuadro = boardService.getCuadro(req.params.id);
     let review = {
@@ -393,11 +324,6 @@ res.render("confirm-review", {cuadro})
 router.get('/cuadro/:id/delete-review/:reviewid', (req, res) => {
     const reviewId = req.params.reviewid;
     const cuadro = boardService.getCuadro(req.params.id);
-<<<<<<< HEAD
-=======
-    let review =boardService.getResenia(req.params.id, reviewId)
-    console.log(review.user);
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
     boardService.deleteResenia(req.params.id, reviewId);
 res.render("confirm-delete-review", {cuadro});
 });
@@ -405,11 +331,8 @@ res.render("confirm-delete-review", {cuadro});
 router.get('/cuadro/:id/edit-review/:reviewid/', (req, res) => {
     const cuadro = boardService.getCuadro(req.params.id);
     const reviewId = req.params.reviewid;
-<<<<<<< HEAD
     let review  =boardService.getResenia(req.params.id, reviewId);
     console.log(review.user);
-=======
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
     res.render("edit-review", {cuadro, reviewId})
 });
 
@@ -429,13 +352,10 @@ router.post('/cuadro/:id/confirm-edit-review/:reviewid/', (req, res) => {
     res.redirect('/info.html/'+ id);
 });
 
-<<<<<<< HEAD
 
 
 //--------------RUBEN TITULO VALIDO--------------
-=======
 //RUBEN 
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 router.get("/availableTitle", (req, res) => {
     let title = req.query.title;
 
@@ -445,7 +365,7 @@ router.get("/availableTitle", (req, res) => {
 
     res.json({available});
 });
-<<<<<<< HEAD
+
 export default router;
 
 //--------------VICTOR AJAX--------------
@@ -470,8 +390,4 @@ router.get("/AJAXCuadrosPart", (req, res) => {
                 cuadros,
     });
 });
-=======
 
-
-export default router;
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703

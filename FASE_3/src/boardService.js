@@ -1,15 +1,13 @@
 const cuadros = new Map();
 let nextId = 0;
-<<<<<<< HEAD
 let totalCuadros = 10; //contador para AJAX (INDEX)
 
 //En la function addCuadro añado la parte en la que compruebo que 
 // el cuadro que voy a añadir no se haya 
 // introducido ya, comparando el titulo.
-=======
-
-//En la function addCuadro añado la parte en la que compruebo que el cuadro que voy a añadir no se haya introducido ya, comparando el titulo.
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
+//En la function addCuadro añado la parte en la q
+// ue compruebo que el cuadro que voy a añadir no se haya 
+// introducido ya, comparando el titulo.
 export function addCuadro(cuadro) {
     if (cuadros.has(cuadro.title)){
         console.log("El cuadro que intentas añadir ya ha sido añadido!")
@@ -21,7 +19,6 @@ export function addCuadro(cuadro) {
         cuadros.set(cuadro.id, cuadro); //Set permite agregar una pareja (en este caso id - objeto) a un map. 
                                     //En este caso, agregamos el id del cuadro asociado a un objeto cuadro dentro del mapa cuadros.
     }
-<<<<<<< HEAD
     totalCuadros++; // va haciendo recuento de numero de cuadros -> AJAX
 }
 
@@ -31,10 +28,6 @@ export function getTotalCuadros() {
 }
 
 
-=======
-}
-
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 export function deleteCuadro(id){
     let cuadro = getCuadro(id);
     cuadros.delete(id);
@@ -72,20 +65,11 @@ export function getArrayCuadrosTitle(){
     return Array.from(cuadros.values()).map(cuadro => cuadro.title);    
 }
 
-<<<<<<< HEAD
 //ariel funciones para editar las reseñas
-
-
-export function getResenia(id, reviewId) {
-    const cuadro = cuadros.get(id);
-    
-    if (!cuadro) return null;
-=======
 export function getResenia(id, reviewId) {
     const cuadro = cuadros.get(id);
     
     if (!cuadro) return null; 
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
     else {
         let review =cuadro.reviewMap.get(reviewId)
         console.log(cuadro.reviewMap.get(reviewId));
@@ -105,36 +89,27 @@ export function updateResennia(cuadroId, order, updatedData) {
     cuadro.reviewMap[reviewIndex] = { ...review, ...updatedData };
     return cuadro.reviewMap[reviewIndex];
 }
+
 export function getResenias(id){
     let cuadro= cuadros.get(id);
     return[...cuadro.reviewMap.values()];
 }
-<<<<<<< HEAD
-<<<<<<<< HEAD:FASE_3/src/boardService.js
-export function addResenia(user, text, rating, id){
-    let cuadro = cuadros.get(id);
-    let review={user, rating, text};
-    review.order=cuadro.reviews++;
-========
-export function addResenia(review, id){
-     let cuadro = cuadros.get(id);
-     cuadro.reviews++
-    review.order=cuadro.reviews.toString();
->>>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703:FASE_2/src/boardService.js
-=======
+
 export function addResenia(review, id){
      let cuadro = cuadros.get(id);
      cuadro.reviews++;
     review.order=cuadro.reviews.toString()
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
     cuadro.reviewMap.set(review.order, review); 
     }
+
+
 export function deleteResenia(id, order){
     let cuadro = cuadros.get(id); 
     let review=cuadro.reviewMap.get(order)
     cuadro.reviews--;
-       cuadro.reviewMap.delete(order);
+    cuadro.reviewMap.delete(order);
         }
+
 export function deleteResenias(id){  
     let cuadro = cuadros.get(id);
         while (cuadro.reviews>0){
@@ -145,7 +120,6 @@ export function deleteResenias(id){
     }
 
 
-<<<<<<< HEAD
 //victor AJAX
 // funcion que va a mostrar los cuadros de 3 en 3
 export function getCuadrosAJAX(from, to) {
@@ -157,6 +131,6 @@ export function getCuadrosAJAX(from, to) {
         return values; 
     }
 }
-=======
 
->>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
+
+
