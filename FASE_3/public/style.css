@@ -16,6 +16,7 @@ header {
 }
 
 footer{
+<<<<<<< HEAD
         padding-top: 20px;
         padding-right: 20px;
         padding-bottom: 20px;
@@ -23,6 +24,12 @@ footer{
         text-align: center;
 }
 
+=======
+    padding-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+}
+>>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 .ocupy-all{
     display:grid;
     min-height: 100dvh;
@@ -41,13 +48,21 @@ footer{
     color: aliceblue;
     text-align: center;
     text-align: center;
+<<<<<<< HEAD
     min-height: 70vh
+=======
+>>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 }
 .foto-containers img {
     width: 100%; 
     height: auto; 
+<<<<<<< HEAD
     max-width: 215px; 
     padding-top: 40px;
+=======
+    max-width: 150px; 
+    padding-top: 20px;
+>>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 }
 .foto-containers h3 {
     text-align: center;
@@ -59,11 +74,15 @@ footer{
     margin-top: 30px;
     padding: auto; 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 .boton-container {
     padding-bottom: 40px;
 }
 
+<<<<<<< HEAD
 .bottom-buttons-index { 
     display:inline-flex;
     justify-content: space-around; /* Distribuye los botones, ajusta esto si prefieres otro alineamiento */
@@ -86,6 +105,8 @@ footer{
 .bottom-buttons-index.center {
     justify-content: center; /* Centra los botones */
 }
+=======
+>>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 /*-----INFO-----*/
 
 .foto-info-container h3 {
@@ -199,6 +220,12 @@ a {
     border-radius: 10px;
     padding-bottom: 50px;
 }
+<<<<<<< HEAD
+=======
+.resenia{
+    margin-bottom: 15px;
+}
+>>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 .resenia-header {
     display: flex;
     justify-content: space-between;
@@ -220,7 +247,10 @@ a {
     margin-left: 5px;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e514154276f25281c8c0e23c9eeb9965b2806703
 .resenia-text {
     margin-top: 10px;
     font-size: 1.1em;
