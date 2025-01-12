@@ -342,11 +342,11 @@ function saveeditedReview(id, reviewId) {
           reviewDiv.innerHTML = `
               <div class="resenia-header">
                   <h3>${data.user}</h3>
-                  <span class="rating" >${data.rating} </span>
+                  <span class="rating" >${data.rating}<i class="bi bi-star-fill"></i></span>
               </div>
               <p class="resenia-text">${data.text}</p>
               <div class="secondary-buttons">
-                  <button class="btn btn-outline-danger" onclick="deleteReview(${id}, ${reviewId})">Borrar Reseña</button>
+                  <button class="btn btn-outline-danger" onclick="deleteReview(${id}, ${reviewId})" >Borrar Reseña</button>
                <button class="btn btn-outline-success" onclick="alloweditReview(${id}, ${reviewId})">Editar Reseña</button>
               </div>
           `;
