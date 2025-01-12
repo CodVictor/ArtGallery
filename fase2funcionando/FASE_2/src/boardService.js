@@ -7,6 +7,8 @@ export function addCuadro(cuadro) {
         console.log("El cuadro que intentas añadir ya ha sido añadido!")
     } else {
         let id = nextId++;
+        cuadro.reviews=0;
+        cuadro.reviewMap= new Map();
         cuadro.id = id.toString(); //Convierte el id en cadena de texto porque es más facil de manejar en los maps
         cuadros.set(cuadro.id, cuadro); //Set permite agregar una pareja (en este caso id - objeto) a un map. 
                                     //En este caso, agregamos el id del cuadro asociado a un objeto cuadro dentro del mapa cuadros.
@@ -49,3 +51,55 @@ export function updateCuadro(id, updatedData) {
 export function getArrayCuadrosTitle(){
     return Array.from(cuadros.values()).map(cuadro => cuadro.title);    
 }
+
+//ariel funciones para editar las reseñas
+
+
+export function getResenia(id, reviewId) {
+    const cuadro = cuadros.get(id);
+    
+    if (!cuadro) return null;
+    else {
+        let review =cuadro.reviewMap.get(reviewId)
+        console.log(cuadro.reviewMap.get(reviewId));
+        return review;
+    }
+}
+
+
+export function updateResennia(cuadroId, order, updatedData) {
+    const cuadro = cuadros.get(cuadroId);
+    if (!cuadro) return null;
+    const reviewIndex = cuadro.reviewMap.findIndex(r => r.id === order);
+    if (reviewIndex === -1) return null;
+
+
+    const review = cuadro.reviewMap[reviewIndex];
+    cuadro.reviewMap[reviewIndex] = { ...review, ...updatedData };
+    return cuadro.reviewMap[reviewIndex];
+}
+export function getResenias(id){
+    let cuadro= cuadros.get(id);
+    return[...cuadro.reviewMap.values()];
+}
+export function addResenia(review, id){
+     let cuadro = cuadros.get(id);
+     cuadro.reviews++
+    review.order=cuadro.reviews.toString();
+    cuadro.reviewMap.set(review.order, review); 
+    }
+export function deleteResenia(id, order){
+    let cuadro = cuadros.get(id); 
+    let review=cuadro.reviewMap.get(order)
+    cuadro.reviews--;
+       cuadro.reviewMap.delete(order);
+        }
+export function deleteResenias(id){  
+    let cuadro = cuadros.get(id);
+        while (cuadro.reviews>0){
+            let cuadro = cuadros.get(id); 
+            cuadro.reviewMap.delete(cuadro.reviews);
+            cuadro.reviews--; 
+        }
+    }
+

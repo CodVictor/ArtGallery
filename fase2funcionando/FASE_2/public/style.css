@@ -330,36 +330,69 @@ textarea {
 .new-cuadro h2{
     margin-bottom: 40px;
 }
+
 .new-cuadro input[type="text"]{
+    margin-top: 5px;
+    margin-bottom: 0px; 
+    margin-left: auto;
+    margin-right: auto;
     width: 60%; 
     padding: 10px; 
     border-radius: 5px; 
-    margin-bottom:20px;
 }
 .new-cuadro input[type="number"]{
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 0px; 
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
 }
 .new-cuadro textarea{
     width: 80%; 
     padding: 10px; 
-    margin-bottom: 20px; 
+    margin-top: 5px;
+    margin-bottom: 0px; 
+    margin-left: auto;
+    margin-right: auto;
     box-sizing: border-box;
     border-radius: 5px; 
 }
 .new-cuadro input[type="date"]{
     width: 180px; 
     padding: 10px; 
-    margin-bottom: 20px; 
+    margin-top: 5px;
+    margin-bottom: 0px; 
+    margin-left: auto;
+    margin-right: auto;
     box-sizing: border-box;
     border-radius: 5px; 
 }
 .new-cuadro input[type="file"] {
-    width: 210px; 
-    margin-bottom: 50px ; 
+    width: 260px; 
+    margin-top: 10px;
+    margin-bottom: 40px ; 
+    margin: auto;
     box-sizing: border-box;
 }
 .new-cuadro button{
    margin: 8px;
+}
+.new-cuadro .valid-feedback{
+    text-align: center;
+    font-size: 15px;
+    margin-top: 2px;
+    margin-bottom:-2px;
+    color:rgba(49, 198, 49, 0.758);
+}
+.new-cuadro .invalid-feedback{
+    text-align: center;
+    font-size: 15px;
+    margin-top: 12px;
+    margin-bottom:-2px;
+    color:rgba(255, 43, 43, 0.797);
+}
+.new-cuadro .invalid-feedback, .valid-feedback p{
+    line-height: 0.2;
 }
 @media (max-width: 700px){
     .new-cuadro{

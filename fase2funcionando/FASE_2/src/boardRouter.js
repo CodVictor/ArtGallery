@@ -124,7 +124,13 @@ boardService.addCuadro({
     opinion: 'La creación artística nunca es un proceso ordenado, sino que surge del caos. Quise mostrar la belleza que puede surgir de la desorganización, esa energía caótica que da paso a nuevas ideas.',
     description: 'Una mesa de trabajo está cubierta con objetos dispersos: pinceles, tintas, papeles arrugados. La luz suave entra por una ventana, iluminando la escena. La atmósfera es de caos creativo, donde las herramientas y materiales parecen tomar vida propia, reflejando la energía de un proceso artístico.'
 });
-
+for (let x=0; x<10; x++){
+    boardService.addResenia({ 
+        user: "Juan Pérez",
+        text: "Bonita obra que muestra las inseguridades del autor y de la gente de la época mediante el simbolismo más abstracto",
+        rating: "4",
+    }, x.toString());
+    }
 //añadir
 const router = express.Router();
 const upload = multer({ dest: UPLOADS_FOLDER })
@@ -147,21 +153,25 @@ router.post('/cuadro/new', upload.single('image'), (req, res) => {
 
     let arrayCuadros = boardService.getArrayCuadrosTitle(); //Llamo a la funcion para crear el array de titles 
 
-    if (arrayCuadros.includes(title)){
-        res.render('new-cuadro-error');
-    } else{
-        boardService.addCuadro({ title, author, style, price, description, opinion, date, imageFilename });
-        res.render('saved-cuadro-msg');
+    const startsWithUpperCase = /^[A-Z]/.test(title);
 
+    if (arrayCuadros.includes(title)||!startsWithUpperCase){
+        return res.status(400).json('Título no disponible');
+    } else if (title === "" || author === "" || style === "" || price === "" || description === "" || opinion === "" || date === "" || imageFilename === ""){
+        return res.status(400).json('Todos los campos son obligatorios');
+    } else{
+        const post = boardService.addCuadro({ title, author, style, price, description, opinion, date, imageFilename });
+        return res.status(200).json(post);   
     }
+
 });
 
 
 router.get('/info.html/:id', (req, res) => {
 
     let cuadro = boardService.getCuadro(req.params.id);
-
-    res.render('info', { cuadro });
+    let reviewMap = boardService.getResenias(req.params.id);
+    res.render('info', { cuadro, reviewMap});
 });
 
 
@@ -237,5 +247,86 @@ router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => { //actual
         res.render('changes-confirmed', { cuadro: updatedCuadro }); // Muestra la página de confirmación con el cuadro actualizado
 
 }}); 
+
+
+
+//ARIEL editar reseña
+
+
+//get para la ruta del formulario
+
+
+router.get('/cuadro/:id/review/:reviewId/edit', (req,res) => {
+    const cuadro = boardService.getCuadro(req.params.id);
+
+
+    if (cuadro) {
+        const review = cuadro.reviewMap.find(r => r.id === req.params.reviewId);
+        if (review) {
+            res.render('edit-review', { review, cuadro });
+        } else {
+            res.status(404).render('error-page', { message: 'Reseña no encontrada' });
+        }  
+}
+ else {res.status(404).render('error-page', { message: 'Cuadro no encontrado' });}
+});
+
+
+//post para guardar cambios en la reseña
+
+router.post('/cuadro/:id/saved-review', (req, res) => {
+    const cuadro = boardService.getCuadro(req.params.id);
+    let review = {
+        user: req.body.user,
+        text: req.body.text,
+        rating: req.body.rating,
+    }
+    boardService.addResenia(review, req.params.id);
+res.render("confirm-review", {cuadro})
+});
+
+router.get('/cuadro/:id/delete-review/:reviewid', (req, res) => {
+    const reviewId = req.params.reviewid;
+    const cuadro = boardService.getCuadro(req.params.id);
+    boardService.deleteResenia(req.params.id, reviewId);
+res.render("confirm-delete-review", {cuadro});
+});
+
+router.get('/cuadro/:id/edit-review/:reviewid/', (req, res) => {
+    const cuadro = boardService.getCuadro(req.params.id);
+    const reviewId = req.params.reviewid;
+    let review  =boardService.getResenia(req.params.id, reviewId);
+    console.log(review.user);
+    res.render("edit-review", {cuadro, reviewId})
+});
+
+router.post('/cuadro/:id/confirm-edit-review/:reviewid/', (req, res) => {
+    const reviewId  = req.params.reviewid;
+    const id =req.params.id;
+    const cuadro = boardService.getCuadro(id);
+
+    let review = {
+        user: req.body.user,
+        text: req.body.text,
+        rating: req.body.rating,
+    }
+    boardService.deleteResenia(id, reviewId);
+    boardService.addResenia(review, id);
+
+    res.redirect('/info.html/'+ id);
+});
+
+
+//RUBEN 
+router.get("/availableTitle", (req, res) => {
+    let title = req.query.title;
+
+    let arrayPaintings = boardService.getArrayCuadrosTitle(); //Llamo a la funcion para crear el array de titles 
+
+    let available = (arrayPaintings.indexOf(title) === -1);
+
+    res.json({available});
+});
+
 
 export default router;

@@ -43,46 +43,30 @@
     
     <section class="opinar">
         <div class="resenias">
-            <h1>Reseñas del Cuadro "De Antes"</h1>
-
+            <h1>Opiniones sobre {{cuadro.title}}</h1>
+            {{#reviewMap}}
             <div class="resenia">
                 <div class="resenia-header">
-                    <h3>María López</h3>
-                    <span class="resenia-fecha">12/10/2024</span>
-                    <span class="rating">5 <i class="bi bi-star-fill"></i></span>
+                    <h3>{{user}}</h3>
+                    <span class="rating">{{rating}} <i class="bi bi-star-fill"></i></span>
 
                 </div>
-                <p class="resenia-text"> Este cuadro me ha impactado profundamente desde el primer momento que lo vi. Los colores vibrantes parecen 
-                    contar una historia por sí solos, mientras las formas abstractas invitan a la interpretación personal. Me 
-                    encanta cómo el uso de la luz crea una sensación de movimiento, casi como si la escena estuviera viva. Cada 
-                    vez que lo miro, descubro nuevos detalles que me hacen reflexionar. 
-                </p>
-            </div>
-
-            <div class="resenia">
-                <div class="resenia-header">
-                    <h3>Juan Pérez</h3>
-                    <span class="resenia-fecha">10/10/2024</span>
-                    <span class="rating">4 <i class="bi bi-star-fill"></i></span>
-
+                <p class="resenia-text">{{text}}</p>
+                <div class="secondary-buttons">
+                    <button class="btn btn-outline-danger"><a href="/cuadro/{{cuadro.id}}/delete-review/{{order}}">Borrar Reseña</a></button>
+                    <button class="btn btn-outline-success"><a href="/cuadro/{{cuadro.id}}/edit-review/{{order}}" >Editar Reseña</a></button>
                 </div>
-                <p class="resenia-text"> Este cuadro me llamó la atención por su serenidad y su uso de colores suaves, que crean una atmósfera tranquila. 
-                    Sin embargo, aunque transmite cierta paz, siento que le falta algo de impacto o profundidad emocional. Los 
-                    elementos parecen estar bien distribuidos, pero a veces me da la impresión de que la obra se queda en la 
-                    superficie, sin llegar a transmitir un mensaje más profundo o poderoso. 
-                </p>
             </div>
-
-            
+            {{/reviewMap}}
 
             <div class="resenia-form">
                 <h2>Deja tu Reseña</h2>
-                <form id="reseniaForm">
-                    <input type="text" id="userName" placeholder="Tu nombre" required>
-                    <textarea id="userReview" placeholder="Escribe tu reseña..." required></textarea>
+                <form id="reseniaForm" action="/cuadro/{{cuadro.id}}/saved-review" method="post">
+                    <input type="text" id="user" name="user"placeholder="Tu nombre" required>
+                    <textarea id="text" name="text"placeholder="Escribe tu reseña..." required></textarea>
                     <div class="num-select">
-                    <label for="number-select">Valora del 1 - 5 el cuadro : </label>
-                    <select class="number-rating" id="number-select" name="numbers">
+                    <label for="rating">Valora del 1 - 5 el cuadro : </label>
+                    <select class="number-rating" id="rating" name="rating">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -91,17 +75,12 @@
                     </select>
                     </div>
                     <div class="send-button"> 
-                        <button class="btn btn-primary">Enviar Reseña</button>
-                    </div>
-                    <div class="secondary-buttons">
-                        <button type="button" class="btn btn-outline-danger">Borrar Reseña</button>
-                        <button type="edit" class="btn btn-outline-success">Editar Reseña</button>
+                        <button type="submit" class="btn btn-primary">Enviar Reseña</button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
-    
     <div class="bottom-buttons">
         <form action="/cuadro/{{cuadro.id}}/delete" method="POST">
             <button type="submit" class="btn btn-danger">Borrar Cuadro</button>
