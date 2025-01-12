@@ -338,26 +338,21 @@ router.post('/cuadro/:id/saved-review', (req, res) => {
 });
 
 
-router.get('/cuadro/:id/delete-review/:reviewid', (req, res) => {
+router.delete('/cuadro/:id/delete-review/:reviewid', async (req, res) => {
     const reviewId = req.params.reviewid;
     const cuadro = boardService.getCuadro(req.params.id);
-    boardService.deleteResenia(req.params.id, reviewId);
-res.render("confirm-delete-review", {cuadro});
-});
-
-router.get('/cuadro/:id/edit-review/:reviewid/', (req, res) => {
-    const cuadro = boardService.getCuadro(req.params.id);
-    const reviewId = req.params.reviewid;
-    let review  =boardService.getResenia(req.params.id, reviewId);
-    console.log(review.user);
-    res.render("edit-review", {cuadro, reviewId})
+    try{
+    await boardService.deleteResenia(req.params.id, reviewId);
+    res.json({error: false})
+    } catch(error){res.json()
+        console.log("error al borrar la reseña")
+    }
 });
 
 router.post('/cuadro/:id/confirm-edit-review/:reviewid/', async (req, res) => {
     const reviewId  = req.params.reviewid;
     const id =req.params.id;
     const cuadro = boardService.getCuadro(id);
-    console.log(`Editando la reseña ${reviewId} del cuadro ${id}`);
     let review = {
         user: req.body.user,
         text: req.body.text,

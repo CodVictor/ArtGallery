@@ -53,7 +53,7 @@
                 </div>
                 <p class="resenia-text">{{text}}</p>
                 <div class="secondary-buttons">
-                    <button class="btn btn-outline-danger"><a href="/cuadro/{{cuadro.id}}/delete-review/{{order}}">Borrar Reseña</a></button>
+                    <button class="btn btn-outline-danger" onclick="deleteReview('{{cuadro.id}}', '{{order}}')">Borrar Reseña</button>
                     <button class="btn btn-outline-success" onclick="alloweditReview('{{cuadro.id}}', '{{order}}')">Editar Reseña</button>
                 </div>
             </div>
