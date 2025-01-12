@@ -16,7 +16,7 @@
         <div class="new-cuadro">
             <h1>Editar Cuadro</h1>
     
-            <form method="POST" action="/cuadro/:id/edit" id="creationForm" enctype="multipart/form-data" class="needs-validation" onsubmit="sendFormEdit(event)" novalidate>
+            <form method="POST" id="creationForm" enctype="multipart/form-data" class="needs-validation" onsubmit="sendFormEdit(event)" novalidate>
                 <div class="mb-3">
                     <label for="artName" id="inputArtName" class="form-label" value="{{cuadro.id}}">Título de la obra</label><br>
                     <input type="text" class="form-control" id="artName" oninput="checkPaintingTitleEdit()" name="title" value="{{cuadro.title}}" required>
@@ -27,21 +27,23 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="author" id="inputArtName">Autor de la obra</label><br>
-                    <input type="text" class="form-control" id="painter-Name" name="author" value="{{cuadro.author}}" required>
+                    <label for="painter-Name" >Autor de la obra</label><br>
+                    <input type="text" class="form-control" id="painter-Name" name="author" value="{{cuadro.author}}" required maxlength="35" />
                     <div class="invalid-feedback" id="painterNameFeedback">Nombre del autor no puede estar vacío</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="style">Período de la obra</label><br>
-                    <input type="text" class="form-control" id="period" name="style" value="{{cuadro.style}}" required>
+                    <input type="text" class="form-control" id="period" name="style" value="{{cuadro.style}}" required maxlength="20" />
                     <div class="invalid-feedback" id="periodFeedback">El período no puede estar vacío</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="price">Precio de la obra</label><br>
-                    <input type="number" class="form-control" id="price" name="price" value="{{cuadro.price}}" oninput="checkPrice()" required>
-                    <div class="invalid-feedback" id="priceFeedback">El precio de la obra no puede estar vacío</div>
+                    <input type="number" class="form-control" id="price" name="price" value="{{cuadro.price}}" oninput="checkPrice()" min="0" required />
+                    <div class="invalid-feedback" id="monetaryValueFeedback">El precio de la obra no puede estar vacío</div>
+                    <div id="minusceroFeedback" class="invalid-feedback">El precio no puede ser inferior a 0</div>
+                    <div id="validPrice" class="valid-feedback">Precio válido</div>
                 </div>
 
                 <div class="mb-3">
@@ -49,7 +51,7 @@
                     <textarea id="description" class="form-control"  name="description" rows="6" oninput="checkDescription()" required>{{cuadro.description}}</textarea>
                     <div class="invalid-feedback" id="descriptionFeedback">La descripción no puede estar vacía</div>
                     <div id="shortDescriptionFeedback" class="invalid-feedback">La descripción debe tener al menos 10 caracteres</div>
-                    <div id="longDescriptionFeedback" class="invalid-feedback">La descripción no puede tener más de 500 caracteres</div>
+                    <div id="longDescriptionFeedback" class="invalid-feedback">La descripción no puede tener más de 900 caracteres</div>
                     <div id="validDescription" class="valid-feedback">Descripción válida</div>                
                 </div>
 

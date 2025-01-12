@@ -226,7 +226,7 @@ router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => { //actual
     let arrayCuadros = boardService.getArrayCuadrosTitle(); //Llamo a la funcion para crear el array de titles 
 
     const cuadroOriginal = boardService.getCuadro(req.params.id); 
-    const oldTitle = cuadroOriginal.title; // Título original antes de los cambios
+    const oldTitle = cuadroOriginal.title.trim(); // Título original antes de los cambios
 
     const updatedData = {
         title: req.body.title,
@@ -241,19 +241,17 @@ router.post('/cuadro/:id/edit', upload.single('image'), (req, res) => { //actual
 
     let { title } = req.body;
 
-    let newTitle = req.body.title;
+    let newTitle = req.body.title.trim();
 
-    if (oldTitle === newTitle){
-        const updatedCuadro = updateCuadro(req.params.id, updatedData);
-        res.render('changes-confirmed'); // Muestra la página de confirmación con el cuadro actualizado
-        return;
-    }
+    
 
-    if (arrayCuadros.includes(title)){
-        res.render('error-edition-cuadro-msg');
-    } else{    
+    if (arrayCuadros.includes(title) && (oldTitle !== newTitle)){
+        return res.status(400).json('Título no disponible');
+    } else if (updatedData.title === "" || updatedData.author === "" || updatedData.style === "" || updatedData.price === "" || updatedData.description === "" || updatedData.opinion === "" || updatedData.date === ""){
+        return res.status(400).json('Todos los campos son obligatorios');
+    }else{    
         const updatedCuadro = updateCuadro(req.params.id, updatedData);
-        res.render('changes-confirmed', { cuadro: updatedCuadro }); // Muestra la página de confirmación con el cuadro actualizado
+        return res.status(200).json(updatedCuadro);          // Muestra la página de confirmación con el cuadro actualizado
 
 }}); 
 

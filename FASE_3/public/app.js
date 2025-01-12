@@ -80,10 +80,10 @@ async function checkDescription() {
     shortDescriptionFeedback.style.display = 'block';
     zona_de_description.classList.add('is-invalid');
     zona_de_description.setCustomValidity("La descripción debe tener al menos 10 caracteres.");
-  } else if (description.length > 500) {
+  } else if (description.length > 900) {
     longDescriptionFeedback.style.display = 'block';
     zona_de_description.classList.add('is-invalid');
-    zona_de_description.setCustomValidity("La descripción no puede tener más de 500 caracteres.");
+    zona_de_description.setCustomValidity("La descripción no puede tener más de 900 caracteres.");
   } else {
     validDescription.style.display = 'block';
     zona_de_description.classList.add('is-valid');
@@ -239,8 +239,8 @@ if (loadMoreRequests * NUM_RESULTADOS_A_MOSTRAR >= 10) {
 async function checkPaintingTitleEdit() {
   //obtengo el valor del input título
   let paintingTitle = document.getElementById("artName");
-  let title = paintingTitle.value;
-  const titleDefault = paintingTitle.defaultValue; // Esto obtiene el valor por defecto del input
+  let title = paintingTitle.value.trim();
+  const titleDefault = paintingTitle.defaultValue.trim(); // Esto obtiene el valor por defecto del input
   //verifico si el titulo está disponible
   const response = await fetch(`/availableTitle?title=${title}`);
   const responseObj = await response.json();
@@ -404,20 +404,21 @@ async function sendFormEdit(event) {
 
   // Verifico el título antes de enviar el formulario por si ya estuviese en uso en el último momento
   //--------------AWAIT--------------
-  await checkPaintingTitleEdit();  // Verifico el título antes de enviar el formulario por si ya estuviese en uso en el último momento
-  /*await checkDescription();
+  await checkDescription();
   await checkDate();
   await checkPrice();
+  await checkPaintingTitleEdit();  // Verifico el título antes de enviar el formulario por si ya estuviese en uso en el último momento
 
-  const zona_de_description = document.getElementById("description");
-  const dateField = document.getElementById("date");
-  const priceField = document.getElementById("price");*/
 
   const paintingTitle = document.getElementById("artName");
+  const zona_de_description = document.getElementById("description");
+  const dateField = document.getElementById("date");
+  const priceField = document.getElementById("price");
+  
   const urlParts = window.location.pathname.split('/'); 
   const paintingId = urlParts[urlParts.length - 2];
 
-  if (paintingTitle.checkValidity()/*&& zona_de_description.checkValidity()&& dateField.checkValidity()&& priceField.checkValidity()*/) {  // Verificar si el campo título pasa la validación personalizada
+  if (paintingTitle.checkValidity()&& zona_de_description.checkValidity()&& dateField.checkValidity()&& priceField.checkValidity()) {  // Verificar si el campo título pasa la validación personalizada
     const formData = new FormData(event.target);
     const response = await fetch(`/cuadro/${paintingId}/edit`, {
       method: "POST",
@@ -428,7 +429,7 @@ async function sendFormEdit(event) {
       alert("Cuadro editado correctamente!");
       window.location.href = "/";
     } else {
-      alert("Error al añadir el cuadro. Rellena todos los campos correctamente.");
+      alert("Error al editar el cuadro. Rellena todos los campos correctamente.");
     }
   } else {
     alert("Hay errores en el formulario. Por favor, revisa los campos.");
