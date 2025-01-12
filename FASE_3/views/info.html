@@ -50,7 +50,6 @@
                 <div class="resenia-header">
                     <h3>{{user}}</h3>
                     <span class="rating">{{rating}} <i class="bi bi-star-fill"></i></span>
-
                 </div>
                 <p class="resenia-text">{{text}}</p>
                 <div class="secondary-buttons">
@@ -59,7 +58,7 @@
                 </div>
             </div>
             {{/reviewMap}}
-
+    
             <div class="resenia-form">
                 <h2>Deja tu Reseña</h2>
                 <form id="reseniaForm" onsubmit="return saveResenia('{{cuadro.id}}')">
@@ -79,10 +78,10 @@
                         <button type="submit" class="btn btn-primary">Enviar Reseña</button>
                     </div>
                 </form>
-                
             </div>
         </div>
     </section>
+    
     <div class="bottom-buttons">
         <form action="/cuadro/{{cuadro.id}}/delete" method="POST">
             <button type="button" class="btn btn-danger" onclick="deleteCuadro('{{cuadro.id}}')">Borrar Cuadro</button>

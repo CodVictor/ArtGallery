@@ -445,54 +445,149 @@ async function deleteCuadro(id) {
 async function saveResenia(cuadroId) {
   event.preventDefault(); // Evitar recargar la página
 
+  // Validar el formulario
+  if (!validateReseniaForm()) return false;
+
   const user = document.getElementById("user").value.trim();
   const text = document.getElementById("text").value.trim();
   const rating = document.getElementById("rating").value;
 
-  if (!user || !text || !rating) {
-      alert("Por favor, completa todos los campos.");
-      return false;
-  }
-
   try {
       const response = await fetch(`/cuadro/${cuadroId}/saved-review`, {
           method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ user, text, rating }),
       });
 
       const result = await response.json();
 
       if (response.ok && result.success) {
-          // Mostrar un mensaje y opción de volver
-          alert(result.message);
-          const reviewsContainer = document.querySelector(".resenias");
+          // Mensaje de que se ha añadido
+          showSuccessDialog(result.message);
 
-          // añadir la nueva reseña al DOM
-          const newReview = `
-              <div class="resenia" data-order="${result.review.order}">
-                  <div class="resenia-header">
-                      <h3>${result.review.user}</h3>
-                      <span class="rating">${result.review.rating} <i class="bi bi-star-fill"></i></span>
-                  </div>
-                  <p class="resenia-text">${result.review.text}</p>
-              </div>`;
-          reviewsContainer.innerHTML += newReview;
+          // Limpiamos el formulario
           document.getElementById("reseniaForm").reset();
 
-          // Redirigir a la página principal
-          if (confirm("¿Deseas volver a la página principal?")) {
-              window.location.href = "/";
-          }
+          // añadimos la reseña al dom
+          const reviewsContainer = document.querySelector(".resenias");
+          const formElement = document.querySelector(".resenia-form");
+
+          // Creamos la reseña para que se vea en la pagina 
+          const newReview = document.createElement("div");
+          newReview.className = "resenia";
+          newReview.dataset.order = result.review.order;
+          newReview.innerHTML = `
+              <div class="resenia-header">
+                  <h3>${result.review.user}</h3>
+                  <span class="rating">${result.review.rating} <i class="bi bi-star-fill"></i></span>
+              </div>
+              <p class="resenia-text">${result.review.text}</p>
+              <div class="secondary-buttons">
+                  <button class="btn btn-outline-danger"><a href="/cuadro/${cuadroId}/delete-review/${result.review.order}">Borrar Reseña</a></button>
+                  <button class="btn btn-outline-success" onclick="alloweditReview('${cuadroId}', '${result.review.order}')">Editar Reseña</button>
+              </div>
+          `;
+
+          // añadimos al contenedor de reseñas la nueva reseña para que aparezca justo debajo de la mas recientemente añadida
+          reviewsContainer.insertBefore(newReview, formElement);
+
+          return true;
       } else {
-          alert(result.message || "Error al guardar la reseña.");
+          // Mostrar error del servidor
+          showErrorDialog(result.message || "Error al guardar la reseña.");
       }
   } catch (error) {
       console.error("Error al guardar la reseña:", error);
-      alert("Ocurrió un error al procesar tu solicitud.");
+      showErrorDialog("Ocurrió un error al procesar tu solicitud.");
   }
 
   return false; // Evitar recargar la página
+}
+
+function showErrorDialog(message) {
+  // Crear cuadro de diálogo dinámico
+  const dialog = document.createElement("div");
+  dialog.className = "alert alert-danger";
+  dialog.innerHTML = `
+      <p>${message}</p>
+      <button class="btn btn-secondary" onclick="closeErrorDialog(this)">Cerrar</button>`;
+  document.body.appendChild(dialog);
+}
+
+function closeErrorDialog(button) {
+  button.parentElement.remove(); // Eliminamos el cuadro de diálogo
+}
+
+
+//FUNCION PARA VALIDAR CAMPOS
+//en este caso si hay algun error en algun campo se nos pide que se muestre al guardar y no de forma dinamica al escribir
+function validateReseniaForm() {
+  const user = document.getElementById("user");
+  const text = document.getElementById("text");
+  const rating = document.getElementById("rating");
+
+  let valid = true;
+
+  // Limpiar mensajes previos
+  clearErrorMessage(user);
+  clearErrorMessage(text);
+  clearErrorMessage(rating);
+
+  // Validar usuario
+  if (user.value.trim() === "") {
+      showErrorMessage(user, "El nombre no puede estar vacío.");
+      valid = false;
+  }
+
+  // Validar texto de la reseña
+  if (text.value.trim().length < 10) {
+      showErrorMessage(text, "La reseña debe tener al menos 10 caracteres.");
+      valid = false;
+  }
+
+  // Validar calificación
+  if (!rating.value || rating.value < 1 || rating.value > 5) {
+      showErrorMessage(rating, "La calificación debe estar entre 1 y 5.");
+      valid = false;
+  }
+
+  return valid;
+}
+
+function showErrorMessage(element, message) {
+  const error = document.createElement("div");
+  error.className = "text-danger";
+  error.textContent = message;
+  element.parentNode.appendChild(error);
+}
+
+function clearErrorMessage(element) {
+  const error = element.parentNode.querySelector(".text-danger");
+  if (error) {
+      error.remove();
+  }
+}
+
+
+
+function showSuccessDialog(message) {
+  const dialog = document.createElement("div");
+  dialog.className = "alert alert-success";
+  dialog.innerHTML = `
+      <p>${message}</p>
+      <button class="btn btn-primary" onclick="closeDialog(this)">Volver</button>`;
+  document.body.appendChild(dialog);
+}
+
+function showErrorDialog(message) {
+  const dialog = document.createElement("div");
+  dialog.className = "alert alert-danger";
+  dialog.innerHTML = `
+      <p>${message}</p>
+      <button class="btn btn-secondary" onclick="closeDialog(this)">Cerrar</button>`;
+  document.body.appendChild(dialog);
+}
+
+function closeDialog(button) {
+  button.parentElement.remove(); // Eliminar el cuadro de diálogo
 }
