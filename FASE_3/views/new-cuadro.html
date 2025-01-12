@@ -41,7 +41,7 @@
 
             <div class="mb-3">
                 <label for="price">¿Cuánto cuesta la obra?</label><br>
-                <input type="number" class="form-control" id="price" name="price" min="0" required />
+                <input type="number" class="form-control" id="price" name="price" oninput="checkPrice()" min="0" required />
                 <div class="invalid-feedback" id="monetaryValueFeedback">El precio de la obra no puede estar vacío</div>
                 <div id="minusceroFeedback" class="invalid-feedback">El precio no puede ser inferior a 0</div>
                 <div id="validPrice" class="valid-feedback">Descripción válida</div>
@@ -49,7 +49,7 @@
                 
             <div class="mb-3">
                 <label for="description">Escribe una descripción</label><br>
-                <textarea id="description" class="form-control" name="description" rows="6" required></textarea>
+                <textarea id="description" class="form-control" name="description" rows="6" oninput="checkDescription()" required></textarea>
                 <div class="invalid-feedback" id="descriptionFeedback">La descripción no puede estar vacía</div>
                 <div id="shortDescriptionFeedback" class="invalid-feedback">La descripción debe tener al menos 10 caracteres</div>
                 <div id="longDescriptionFeedback" class="invalid-feedback">La descripción no puede tener más de 500 caracteres</div>
@@ -64,7 +64,7 @@
             
             <div class="mb-3">
                 <label for="date">¿Cuál es la fecha del cuadro?</label><br>
-                <input type="date" id="date" class="form-control" name="date" required /> <!--añadir fecha máxima (hoy) con script posteriormente-->
+                <input type="date" id="date" class="form-control" name="date" oninput="checkDate()" required /> <!--añadir fecha máxima (hoy) con script posteriormente-->
                 <div class="invalid-feedback" id="dateFeedback">La fecha no puede estar vacía</div>
                 <div id="futureDateFeedback" class="invalid-feedback">La fecha debe ser anterior a la fecha de hoy</div>
                 <div id="validDate" class="valid-feedback">Fecha válida</div>

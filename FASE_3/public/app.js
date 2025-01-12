@@ -1,5 +1,4 @@
 //--------------FUNCIONES PARA NEW-CUADRO:--------------
-
 //--------------CHECK TITULO--------------
 async function checkPaintingTitle() {
   //obtengo el valor del input título
@@ -49,8 +48,6 @@ async function checkPaintingTitle() {
   //he implementado los mensajes usando div y las clases de valid-feedback e invalid-feedback
 }
 
-
-
 //--------------CHECK DESCRIPCION--------------
 async function checkDescription() {
   //obtengo el valor del input description
@@ -70,7 +67,11 @@ async function checkDescription() {
       zona_de_description.classList.remove('is-valid', 'is-invalid');
       zona_de_description.setCustomValidity("");
 
-  if (description.length < 10) {
+  if (description === "") {
+        emptyFeedback.style.display = 'block';
+        zona_de_description.classList.add('is-invalid');
+        zona_de_description.setCustomValidity("La descripcion no puede estar vacía");
+  } else if (description.length < 10) {
     shortDescriptionFeedback.style.display = 'block';
     zona_de_description.classList.add('is-invalid');
     zona_de_description.setCustomValidity("La descripción debe tener al menos 10 caracteres.");
@@ -89,6 +90,7 @@ async function checkDescription() {
 async function checkDate() {
     let dateField = document.getElementById("date"); // Suponiendo que el campo de fecha tiene id="date"
     let dateValue = new Date(dateField.value); // Obtener la fecha ingresada
+    let date = dateField.value;
 
     let futureDateFeedback = document.getElementById("futureDateFeedback");
     let validDate = document.getElementById("validDate");
@@ -106,11 +108,15 @@ async function checkDate() {
       today.setHours(0, 0, 0, 0); // Asegurarse de que solo se compare la fecha sin la hora
 
   // Verificación de la fecha
-  if (dateValue >= today) {
+  if (date === "") {
+    emptyFeedback.style.display = 'block';
+    dateField.classList.add('is-invalid');
+    dateField.setCustomValidity("La descripcion no puede estar vacía");
+  } else if (dateValue >= today) {
     futureDateFeedback.style.display = 'block';
     dateField.classList.add('is-invalid');
     dateField.setCustomValidity("La fecha debe ser anterior a la fecha de hoy.");
-  } else {
+  } else if (dateValue < today){
     validDate.style.display = 'block';
     dateField.classList.add('is-valid');
     dateField.setCustomValidity(""); // Si es válida, se elimina cualquier mensaje de error.
@@ -121,6 +127,7 @@ async function checkDate() {
 async function checkPrice() {
     let priceField = document.getElementById("price"); // Suponiendo que el campo de precio tiene id="price"
     let priceValue = parseFloat(priceField.value); // Convertir el valor ingresado a un número flotante
+    let price = priceField.value;
 
     let minusceroFeedback = document.getElementById("minusceroFeedback");
     let validPrice = document.getElementById("validPrice");
@@ -134,7 +141,12 @@ async function checkPrice() {
       priceField.setCustomValidity(""); // Eliminar cualquier mensaje de error previo
 
   // Verificación del precio
-  if (isNaN(priceValue) || priceValue <= 0) {
+  
+  if (price === "") {
+    emptyFeedback.style.display = 'block';
+    priceField.classList.add('is-invalid');
+    priceField.setCustomValidity("El precio no puede estar vacío");
+  } else if (isNaN(priceValue) || priceValue <= 0) {
     minusceroFeedback.style.display = 'block';
     priceField.classList.add('is-invalid');
     priceField.setCustomValidity("El precio debe ser un número válido mayor que 0.");
@@ -219,8 +231,8 @@ if (loadMoreRequests * NUM_RESULTADOS_A_MOSTRAR >= 10) {
 async function checkPaintingTitleEdit() {
   //obtengo el valor del input título
   let paintingTitle = document.getElementById("artName");
-  let title = paintingTitle.value.trim();
-  const titleDefault = paintingTitle.defaultValue.trim(); // Esto obtiene el valor por defecto del input
+  let title = paintingTitle.value;
+  const titleDefault = paintingTitle.defaultValue; // Esto obtiene el valor por defecto del input
   //verifico si el titulo está disponible
   const response = await fetch(`/availableTitle?title=${title}`);
   const responseObj = await response.json();
@@ -267,6 +279,7 @@ async function checkPaintingTitleEdit() {
   //Para poder mostrar los mensajes escritos por setCustomValidity, pondría al final: paintingTitle.reportValidity();, pero en este caso no me interesa, ya que,
   //he implementado los mensajes usando div y las clases de valid-feedback e invalid-feedback
 }
+
 async function sendFormEdit(event) {
   event.preventDefault();  // elimino el envío por defecto del formulario
 
@@ -274,13 +287,21 @@ async function sendFormEdit(event) {
   form.classList.add('was-validated');  // Activar la validación por defecto de Bootstrap
 
   // Verifico el título antes de enviar el formulario por si ya estuviese en uso en el último momento
-  await checkPaintingTitleEdit();
+  //--------------AWAIT--------------
+  await checkPaintingTitleEdit();  // Verifico el título antes de enviar el formulario por si ya estuviese en uso en el último momento
+  /*await checkDescription();
+  await checkDate();
+  await checkPrice();
+
+  const zona_de_description = document.getElementById("description");
+  const dateField = document.getElementById("date");
+  const priceField = document.getElementById("price");*/
 
   const paintingTitle = document.getElementById("artName");
   const urlParts = window.location.pathname.split('/'); 
   const paintingId = urlParts[urlParts.length - 2];
 
-  if (paintingTitle.checkValidity()) {  // Verificar si el campo título pasa la validación personalizada
+  if (paintingTitle.checkValidity()/*&& zona_de_description.checkValidity()&& dateField.checkValidity()&& priceField.checkValidity()*/) {  // Verificar si el campo título pasa la validación personalizada
     const formData = new FormData(event.target);
     const response = await fetch(`/cuadro/${paintingId}/edit`, {
       method: "POST",
