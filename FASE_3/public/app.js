@@ -74,7 +74,6 @@ async function checkDescription() {
         descriptionFeedback.style.display = 'block';
         zona_de_description.classList.add('is-invalid');
         zona_de_description.setCustomValidity("La descripcion no puede estar vacía");
-    emptyFeedback.style.display = 'block';
     zona_de_description.classList.add('is-invalid');
     zona_de_description.setCustomValidity("La descripcion no puede estar vacía");
   } else if (description.length < 10) {
@@ -155,7 +154,7 @@ async function checkPrice() {
     monetaryValueFeedback.style.display = 'block';
     priceField.classList.add('is-invalid');
     priceField.setCustomValidity("El precio no puede estar vacío");
-  } else if (isNaN(priceValue) || priceValue <= 0) {
+  } else if (isNaN(priceValue) || priceValue < 0) {
     minusceroFeedback.style.display = 'block';
     priceField.classList.add('is-invalid');
     priceField.setCustomValidity("El precio debe ser un número válido mayor que 0.");
