@@ -412,3 +412,87 @@ async function sendFormEdit(event) {
     alert("Hay errores en el formulario. Por favor, revisa los campos.");
   }
 }
+
+
+
+//BORRAR CUADRO CON AJAX
+
+async function deleteCuadro(id) {
+  //confirmacion por si se ha equivocado de boton
+  const confirmation = confirm("¿Estás seguro de que deseas borrar este cuadro?");
+  if (!confirmation) return;
+
+  try { //si ha confirmado enviamos peticion al servidor para borrar la reseña
+      const response = await fetch(`/cuadro/${id}/delete`, {
+          method: "POST",
+      });
+
+      if (response.ok) { //si todo ha salido bien se elimina la reseña y se muestra el mensaje de confirmacion
+          alert("Cuadro eliminado con éxito.");
+          window.location.href = "/";
+      } else {
+          alert("Error al eliminar el cuadro.");
+      }
+  } catch (error) {
+      console.error("Error al eliminar el cuadro:", error); //mostramos el error especifico que ha ocurrido
+      alert("Ocurrió un error al procesar tu solicitud.");
+  }
+}
+
+
+
+//FUNCION PARA CREAR LA RESEÑA CON AJAX
+async function saveResenia(cuadroId) {
+  event.preventDefault(); // Evitar recargar la página
+
+  const user = document.getElementById("user").value.trim();
+  const text = document.getElementById("text").value.trim();
+  const rating = document.getElementById("rating").value;
+
+  if (!user || !text || !rating) {
+      alert("Por favor, completa todos los campos.");
+      return false;
+  }
+
+  try {
+      const response = await fetch(`/cuadro/${cuadroId}/saved-review`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user, text, rating }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+          // Mostrar un mensaje y opción de volver
+          alert(result.message);
+          const reviewsContainer = document.querySelector(".resenias");
+
+          // añadir la nueva reseña al DOM
+          const newReview = `
+              <div class="resenia" data-order="${result.review.order}">
+                  <div class="resenia-header">
+                      <h3>${result.review.user}</h3>
+                      <span class="rating">${result.review.rating} <i class="bi bi-star-fill"></i></span>
+                  </div>
+                  <p class="resenia-text">${result.review.text}</p>
+              </div>`;
+          reviewsContainer.innerHTML += newReview;
+          document.getElementById("reseniaForm").reset();
+
+          // Redirigir a la página principal
+          if (confirm("¿Deseas volver a la página principal?")) {
+              window.location.href = "/";
+          }
+      } else {
+          alert(result.message || "Error al guardar la reseña.");
+      }
+  } catch (error) {
+      console.error("Error al guardar la reseña:", error);
+      alert("Ocurrió un error al procesar tu solicitud.");
+  }
+
+  return false; // Evitar recargar la página
+}

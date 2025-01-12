@@ -62,29 +62,30 @@
 
             <div class="resenia-form">
                 <h2>Deja tu Reseña</h2>
-                <form id="reseniaForm" action="/cuadro/{{cuadro.id}}/saved-review" method="post">
-                    <input type="text" id="user" name="user"placeholder="Tu nombre" required>
-                    <textarea id="text" name="text"placeholder="Escribe tu reseña..." required></textarea>
+                <form id="reseniaForm" onsubmit="return saveResenia('{{cuadro.id}}')">
+                    <input type="text" id="user" name="user" placeholder="Tu nombre" required>
+                    <textarea id="text" name="text" placeholder="Escribe tu reseña..." required></textarea>
                     <div class="num-select">
-                    <label for="rating">Valora del 1 - 5 el cuadro : </label>
-                    <select class="number-rating" id="rating" name="rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5" selected>5</option>
-                    </select>
+                        <label for="rating">Valora del 1 - 5 el cuadro : </label>
+                        <select class="number-rating" id="rating" name="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5" selected>5</option>
+                        </select>
                     </div>
-                    <div class="send-button"> 
+                    <div class="send-button">
                         <button type="submit" class="btn btn-primary">Enviar Reseña</button>
                     </div>
                 </form>
+                
             </div>
         </div>
     </section>
     <div class="bottom-buttons">
         <form action="/cuadro/{{cuadro.id}}/delete" method="POST">
-            <button type="submit" class="btn btn-danger">Borrar Cuadro</button>
+            <button type="button" class="btn btn-danger" onclick="deleteCuadro('{{cuadro.id}}')">Borrar Cuadro</button>
         </form>
         <form>
         <button class="btn btn-success"><a href="/cuadro/{{cuadro.id}}/edit" class="text-white text-decoration-none">Editar cuadro</a></button>

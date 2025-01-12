@@ -312,14 +312,31 @@ router.post('/cuadro/:id/review/:reviewId/edit', (req, res) => {
 //post para guardar cambios en la reseña
 router.post('/cuadro/:id/saved-review', (req, res) => {
     const cuadro = boardService.getCuadro(req.params.id);
-    let review = {
-        user: req.body.user,
-        text: req.body.text,
-        rating: req.body.rating,
+
+    if (!cuadro) {
+        return res.status(404).json({ success: false, message: 'Cuadro no encontrado.' });
     }
+
+    const { user, text, rating } = req.body;
+
+    if (!user || !text || !rating || isNaN(rating) || rating < 1 || rating > 5) {
+        return res.status(400).json({ success: false, message: 'Datos inválidos para la reseña.' });
+    }
+
+    const review = {
+        user,
+        text,
+        rating,
+    };
+
     boardService.addResenia(review, req.params.id);
-res.render("confirm-review", {cuadro})
+    return res.status(200).json({
+        success: true,
+        message: 'Reseña añadida con éxito.',
+        review,
+    });
 });
+
 
 router.get('/cuadro/:id/delete-review/:reviewid', (req, res) => {
     const reviewId = req.params.reviewid;
