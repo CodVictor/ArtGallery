@@ -288,17 +288,16 @@ async function checkPaintingTitleEdit() {
   //he implementado los mensajes usando div y las clases de valid-feedback e invalid-feedback
 }
 function alloweditReview(id, reviewId){
-  console.log(id, reviewId)
   const reviewDiv = document.querySelector(`.resenia[data-order="${reviewId}"]`);
   reviewDiv.innerHTML = `
   <form class="edit-review-form" data-order="${reviewId}">
   <div class="form-group">
                 <label for="review-user-${reviewId}">Usuario</label>
-                <input type="text" id="review-user-${reviewId}" class="form-control" placeholder="Nombre de usuario" />
+                <input type="text" id="review-user-${reviewId}"/>
             </div>
       <div class="form-group">
-          <label for="review-text-${reviewId}">Editar Reseña</label>
-          <textarea id="review-text-${reviewId}" class="form-control" rows="3"></textarea>
+          <label for="review-text-${reviewId}" >Editar Reseña</label>
+          <textarea id="review-text-${reviewId}"rows="3"></textarea>
       </div>
       <div class="form-group">
           <label for="review-rating-${reviewId}">Calificación</label>
@@ -310,18 +309,18 @@ function alloweditReview(id, reviewId){
               <option value="5">5</option>
           </select>
       </div>
+
       <button type="button" class="btn btn-success" onclick="saveeditedReview(${id},${reviewId})">Guardar</button>
       <button type="button" class="btn btn-secondary" onclick="cancelEdit(${id},${reviewId})">Cancelar</button>
   </form>
 `;
 }
 function saveeditedReview(id, reviewId) {
-  // Obtener los nuevos valores
+
   const newUser = document.querySelector(`#review-user-${reviewId}`).value;
   const newText = document.querySelector(`#review-text-${reviewId}`).value;
   const newRating = document.querySelector(`#review-rating-${reviewId}`).value;
 
-  // Enviar los datos al servidor usando fetch
   fetch(`/cuadro/${id}/confirm-edit-review/${reviewId}/`, {
       method: 'POST',
       headers: {
@@ -333,28 +332,28 @@ function saveeditedReview(id, reviewId) {
         if (!response.ok) {
           throw new Error("Error al guardar la reseña");
       }
-      return response.json(); // Aquí esperamos un JSON válido
+      return response.json(); 
   })
       .then(data => {
         console.log("ok");
-          // Actualizar la reseña en la interfaz con la respuesta del servidor
+    
           const reviewDiv = document.querySelector(`.resenia[data-order="${reviewId}"]`);
           reviewDiv.innerHTML = `
               <div class="resenia-header">
                   <h3>${data.user}</h3>
-                  <span class="rating">${data.rating} <i class="bi bi-star-fill"></i></span>
+                  <span class="rating" >${data.rating}<i class="bi bi-star-fill"></i></span>
               </div>
               <p class="resenia-text">${data.text}</p>
               <div class="secondary-buttons">
-                  <button class="btn btn-outline-danger"><a href="/cuadro/${data.cuadroId}/delete-review/${reviewId}">Borrar Reseña</a></button>
-                  <button class="btn btn-outline-success" onclick="alloweditReview(${id}, ${reviewId})>Editar Reseña</button>
+                  <button class="btn btn-outline-danger" onclick="deleteReview(${id}, ${reviewId})" >Borrar Reseña</button>
+               <button class="btn btn-outline-success" onclick="alloweditReview(${id}, ${reviewId})">Editar Reseña</button>
               </div>
           `;
       })
       .catch(error => console.error('Error al guardar la reseña:', error));
 }
-function canceleditReview(order) {
-  // Restaurar el contenido original de la reseña
+function canceleditReview(order) { //lo he separado para no tener un bloque demasiado grande
+
   fetch(`/cuadro/get-review/${order}`)
       .then(response => response.json())
       .then(data => {
@@ -366,12 +365,36 @@ function canceleditReview(order) {
               </div>
               <p class="resenia-text">${data.text}</p>
               <div class="secondary-buttons">
-                  <button class="btn btn-outline-danger"><a href="/cuadro/${data.cuadroId}/delete-review/${order}">Borrar Reseña</a></button>
-                  <button class="btn btn-outline-success" onclick="editReview(${order})">Editar Reseña</button>
+               <button class="btn btn-outline-danger" onclick="deleteReview(${id}, ${order})">Borrar Reseña</button>
+               <button class="btn btn-outline-success" onclick="alloweditReview(${id}, ${reviewId})">Editar Reseña</button>
               </div>
           `;
       })
       .catch(error => console.error('Error al cancelar edición:', error));
+}
+async function deleteReview(id, reviewId) {
+
+try{
+  const response = await fetch(`/cuadro/${id}/delete-review/${reviewId}/`, {
+    method: 'DELETE',
+  })  
+  const data = await response.json();
+  if(response.error){
+    throw new Error("ha habido un error")
+  }
+    else{const reviewDiv = document.querySelector(`.resenia[data-order="${reviewId}"]`);
+          if(reviewDiv){
+          reviewDiv.remove()
+         console.log("reseña borrada")
+          }
+          else{
+          console.log("error del cliente al borrar")}}
+    }
+      catch (error) {
+        alert('Hubo un error al borrar la reseña, intentelo de nuevo mas tarde');
+        console.log(error)
+      }
+      
 }
 async function sendFormEdit(event) {
   event.preventDefault();  // elimino el envío por defecto del formulario
@@ -482,7 +505,8 @@ async function saveResenia(cuadroId) {
               </div>
               <p class="resenia-text">${result.review.text}</p>
               <div class="secondary-buttons">
-                  <button class="btn btn-outline-danger"><a href="/cuadro/${cuadroId}/delete-review/${result.review.order}">Borrar Reseña</a></button>
+              
+                  <button class="btn btn-outline-danger"onclick="deleteReview(${cuadroId}, ${result.review.order})">Borrar Reseña</button>
                   <button class="btn btn-outline-success" onclick="alloweditReview('${cuadroId}', '${result.review.order}')">Editar Reseña</button>
               </div>
           `;

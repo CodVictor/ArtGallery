@@ -296,8 +296,7 @@ router.get('/cuadro/:id/edit-review/:reviewid/', (req, res) => {
     const cuadro = boardService.getCuadro(req.params.id);
     const reviewId = req.params.reviewid;
     let review  =boardService.getResenia(req.params.id, reviewId);
-    console.log(review.user);
-    res.render("edit-review", {cuadro, reviewId})
+    res.render("edit-review", {cuadro, reviewId, review})
 });
 
 router.post('/cuadro/:id/confirm-edit-review/:reviewid/', (req, res) => {
