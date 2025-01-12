@@ -54,15 +54,16 @@ async function checkDescription() {
     let zona_de_description = document.getElementById("description");
     let description = zona_de_description.value;
 
-
     let shortDescriptionFeedback = document.getElementById("shortDescriptionFeedback");
     let longDescriptionFeedback = document.getElementById("longDescriptionFeedback");
     let validDescription = document.getElementById("validDescription");
+    let emptyFeedback = document.getElementById("descriptionFeedback");
 
 
       shortDescriptionFeedback.style.display = 'none';
       longDescriptionFeedback.style.display = 'none';
       validDescription.style.display = 'none';
+      emptyFeedback.style.display = 'none';
 
       zona_de_description.classList.remove('is-valid', 'is-invalid');
       zona_de_description.setCustomValidity("");
@@ -71,6 +72,9 @@ async function checkDescription() {
         emptyFeedback.style.display = 'block';
         zona_de_description.classList.add('is-invalid');
         zona_de_description.setCustomValidity("La descripcion no puede estar vacía");
+    emptyFeedback.style.display = 'block';
+    zona_de_description.classList.add('is-invalid');
+    zona_de_description.setCustomValidity("La descripcion no puede estar vacía");
   } else if (description.length < 10) {
     shortDescriptionFeedback.style.display = 'block';
     zona_de_description.classList.add('is-invalid');
@@ -279,7 +283,92 @@ async function checkPaintingTitleEdit() {
   //Para poder mostrar los mensajes escritos por setCustomValidity, pondría al final: paintingTitle.reportValidity();, pero en este caso no me interesa, ya que,
   //he implementado los mensajes usando div y las clases de valid-feedback e invalid-feedback
 }
+function alloweditReview(id, reviewId){
+  console.log(id, reviewId)
+  const reviewDiv = document.querySelector(`.resenia[data-order="${reviewId}"]`);
+  reviewDiv.innerHTML = `
+  <form class="edit-review-form" data-order="${reviewId}">
+  <div class="form-group">
+                <label for="review-user-${reviewId}">Usuario</label>
+                <input type="text" id="review-user-${reviewId}" class="form-control" placeholder="Nombre de usuario" />
+            </div>
+      <div class="form-group">
+          <label for="review-text-${reviewId}">Editar Reseña</label>
+          <textarea id="review-text-${reviewId}" class="form-control" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+          <label for="review-rating-${reviewId}">Calificación</label>
+          <select id="review-rating-${reviewId}" class="form-control">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+          </select>
+      </div>
+      <button type="button" class="btn btn-success" onclick="saveeditedReview(${id},${reviewId})">Guardar</button>
+      <button type="button" class="btn btn-secondary" onclick="cancelEdit(${id},${reviewId})">Cancelar</button>
+  </form>
+`;
+}
+function saveeditedReview(id, reviewId) {
+  // Obtener los nuevos valores
+  const newUser = document.querySelector(`#review-user-${reviewId}`).value;
+  const newText = document.querySelector(`#review-text-${reviewId}`).value;
+  const newRating = document.querySelector(`#review-rating-${reviewId}`).value;
 
+  // Enviar los datos al servidor usando fetch
+  fetch(`/cuadro/${id}/confirm-edit-review/${reviewId}/`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user: newUser, text: newText, rating: newRating }),
+  })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al guardar la reseña");
+      }
+      return response.json(); // Aquí esperamos un JSON válido
+  })
+      .then(data => {
+        console.log("ok");
+          // Actualizar la reseña en la interfaz con la respuesta del servidor
+          const reviewDiv = document.querySelector(`.resenia[data-order="${reviewId}"]`);
+          reviewDiv.innerHTML = `
+              <div class="resenia-header">
+                  <h3>${data.user}</h3>
+                  <span class="rating">${data.rating} <i class="bi bi-star-fill"></i></span>
+              </div>
+              <p class="resenia-text">${data.text}</p>
+              <div class="secondary-buttons">
+                  <button class="btn btn-outline-danger"><a href="/cuadro/${data.cuadroId}/delete-review/${reviewId}">Borrar Reseña</a></button>
+                  <button class="btn btn-outline-success" onclick="alloweditReview(${id}, ${reviewId})>Editar Reseña</button>
+              </div>
+          `;
+      })
+      .catch(error => console.error('Error al guardar la reseña:', error));
+}
+function canceleditReview(order) {
+  // Restaurar el contenido original de la reseña
+  fetch(`/cuadro/get-review/${order}`)
+      .then(response => response.json())
+      .then(data => {
+          const reviewDiv = document.querySelector(`.resenia[data-order="${order}"]`);
+          reviewDiv.innerHTML = `
+              <div class="resenia-header">
+                  <h3>${data.user}</h3>
+                  <span class="rating">${data.rating} <i class="bi bi-star-fill"></i></span>
+              </div>
+              <p class="resenia-text">${data.text}</p>
+              <div class="secondary-buttons">
+                  <button class="btn btn-outline-danger"><a href="/cuadro/${data.cuadroId}/delete-review/${order}">Borrar Reseña</a></button>
+                  <button class="btn btn-outline-success" onclick="editReview(${order})">Editar Reseña</button>
+              </div>
+          `;
+      })
+      .catch(error => console.error('Error al cancelar edición:', error));
+}
 async function sendFormEdit(event) {
   event.preventDefault();  // elimino el envío por defecto del formulario
 

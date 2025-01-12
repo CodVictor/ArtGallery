@@ -336,20 +336,26 @@ router.get('/cuadro/:id/edit-review/:reviewid/', (req, res) => {
     res.render("edit-review", {cuadro, reviewId})
 });
 
-router.post('/cuadro/:id/confirm-edit-review/:reviewid/', (req, res) => {
+router.post('/cuadro/:id/confirm-edit-review/:reviewid/', async (req, res) => {
     const reviewId  = req.params.reviewid;
     const id =req.params.id;
     const cuadro = boardService.getCuadro(id);
-
+    console.log(`Editando la reseña ${reviewId} del cuadro ${id}`);
     let review = {
         user: req.body.user,
         text: req.body.text,
         rating: req.body.rating,
     }
-    boardService.deleteResenia(id, reviewId);
-    boardService.addResenia(review, id);
-
-    res.redirect('/info.html/'+ id);
+    await boardService.deleteResenia(id, reviewId);
+    await boardService.addResenia(review, id);
+    console.log(review);
+    res.json({
+        success: true,
+        user: review.user,
+        text: review.text,
+        rating: review.rating,
+    });
+    
 });
 
 
