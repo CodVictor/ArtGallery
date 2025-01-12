@@ -54,23 +54,24 @@ async function checkDescription() {
     let zona_de_description = document.getElementById("description");
     let description = zona_de_description.value;
 
-
     let shortDescriptionFeedback = document.getElementById("shortDescriptionFeedback");
     let longDescriptionFeedback = document.getElementById("longDescriptionFeedback");
     let validDescription = document.getElementById("validDescription");
+    let emptyFeedback = document.getElementById("descriptionFeedback");
 
 
       shortDescriptionFeedback.style.display = 'none';
       longDescriptionFeedback.style.display = 'none';
       validDescription.style.display = 'none';
+      emptyFeedback.style.display = 'none';
 
       zona_de_description.classList.remove('is-valid', 'is-invalid');
       zona_de_description.setCustomValidity("");
 
   if (description === "") {
-        emptyFeedback.style.display = 'block';
-        zona_de_description.classList.add('is-invalid');
-        zona_de_description.setCustomValidity("La descripcion no puede estar vacía");
+    emptyFeedback.style.display = 'block';
+    zona_de_description.classList.add('is-invalid');
+    zona_de_description.setCustomValidity("La descripcion no puede estar vacía");
   } else if (description.length < 10) {
     shortDescriptionFeedback.style.display = 'block';
     zona_de_description.classList.add('is-invalid');
