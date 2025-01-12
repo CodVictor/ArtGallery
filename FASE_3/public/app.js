@@ -58,8 +58,11 @@ async function checkDescription() {
     let shortDescriptionFeedback = document.getElementById("shortDescriptionFeedback");
     let longDescriptionFeedback = document.getElementById("longDescriptionFeedback");
     let validDescription = document.getElementById("validDescription");
+    let descriptionFeedback = document.getElementById("descriptionFeedback");
 
+    
 
+    descriptionFeedback.style.display = 'none';
       shortDescriptionFeedback.style.display = 'none';
       longDescriptionFeedback.style.display = 'none';
       validDescription.style.display = 'none';
@@ -68,7 +71,7 @@ async function checkDescription() {
       zona_de_description.setCustomValidity("");
 
   if (description === "") {
-        emptyFeedback.style.display = 'block';
+        descriptionFeedback.style.display = 'block';
         zona_de_description.classList.add('is-invalid');
         zona_de_description.setCustomValidity("La descripcion no puede estar vacía");
     emptyFeedback.style.display = 'block';
@@ -97,10 +100,12 @@ async function checkDate() {
 
     let futureDateFeedback = document.getElementById("futureDateFeedback");
     let validDate = document.getElementById("validDate");
+    let dateFeedback = document.getElementById("dateFeedback");
 
   // Ocultar mensajes
       futureDateFeedback.style.display = 'none';
       validDate.style.display = 'none';
+      dateFeedback.style.display = 'none';
 
   // Limpiar clases de validación
       dateField.classList.remove('is-valid', 'is-invalid');
@@ -112,7 +117,7 @@ async function checkDate() {
 
   // Verificación de la fecha
   if (date === "") {
-    emptyFeedback.style.display = 'block';
+    dateFeedback.style.display = 'block';
     dateField.classList.add('is-invalid');
     dateField.setCustomValidity("La descripcion no puede estar vacía");
   } else if (dateValue >= today) {
@@ -134,11 +139,12 @@ async function checkPrice() {
 
     let minusceroFeedback = document.getElementById("minusceroFeedback");
     let validPrice = document.getElementById("validPrice");
+    let monetaryValueFeedback = document.getElementById("monetaryValueFeedback");
 
   // Ocultar los mensajes de error y éxito
       minusceroFeedback.style.display = 'none';
       validPrice.style.display = 'none';
-
+      monetaryValueFeedback.style.display = 'none';
   // Limpiar las clases de validación
       priceField.classList.remove('is-valid', 'is-invalid');
       priceField.setCustomValidity(""); // Eliminar cualquier mensaje de error previo
@@ -146,7 +152,7 @@ async function checkPrice() {
   // Verificación del precio
   
   if (price === "") {
-    emptyFeedback.style.display = 'block';
+    monetaryValueFeedback.style.display = 'block';
     priceField.classList.add('is-invalid');
     priceField.setCustomValidity("El precio no puede estar vacío");
   } else if (isNaN(priceValue) || priceValue <= 0) {

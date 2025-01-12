@@ -21,9 +21,9 @@
             <div class="mb-3"> 
                 <label for="artName" class="form-label">¿Cuál es el título de la obra?</label><br>
                 <input type="text" class="form-control" id="artName" oninput="checkPaintingTitle()" name="title" maxlength="30" required/>
+                <div class="invalid-feedback" id="emptyFeedback">El título no puede estar vacío</div>
                 <div class="invalid-feedback" id="upperCaseFeedback">El título debe empezar con mayúscula</div>
                 <div class="invalid-feedback" id="repeatedTitle">El título ya está en uso</div>
-                <div class="invalid-feedback" id="emptyFeedback">El título no puede estar vacío</div>
                 <div class="valid-feedback" id="validTitle">Título disponible</div>
             </div>
             
