@@ -8,23 +8,23 @@
         <link rel="icon" type="image/png" href="../faviconVVISUAL.png">
         <link rel="stylesheet" href="/style.css">
     </head>
-<body class="ocupy-all">
-    <div class="ocupy-all">
+<body>
+    <div >
 
         {{>header}}
     
-    
-        <div class="cuadro-msg">
+        <section class="aspecto-principal">
+        <div class="new-cuadro">
 
    <h1>Editar Reseña</h1>
     <form action="/cuadro/{{cuadro.id}}/confirm-edit-review/{{reviewId}}" method="POST">
-        <label for="title">Usuario:</label>
-        <input type="text" name="user" id="user" value="{{review.user}}" required>
+        <br><label for="title">Usuario:</label>
+        <br><input type="text" name="user" id="user" value="{{review.user}}" required>
         <br>
-        <label for="content">Contenido:</label>
-        <textarea name="text" id="text"  required>{{review.text}}</textarea>
+        <br><label for="content">Contenido:</label>
+        <br><textarea name="text" id="text" rows="6" required>{{review.text}}</textarea>
         <br>
-        <label for="rating">Calificación (1-5):</label>
+        <br><label for="rating">Calificación (1-5):</label>
         <select class="number-rating" id="rating" name="rating">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -32,14 +32,15 @@
             <option value="4">4</option>
             <option value="5">5</option>
         </select> <br>
-        <button type="submit">Guardar</button>
+        <br><br><button type="submit" value="save" class="btn btn-primary btn-lg">Guardar Cambios</button>
+        <button type="button" class="btn btn-danger btn-lg" onclick="location.href='/'">Volver a la pagina principal</button>
+
     </form>
-    <a href="/">Volver a la página principal</a>
 
-</div>
 
+    </section>
 
 {{>footer}}
-</div>
+
 </body>
 </html>
