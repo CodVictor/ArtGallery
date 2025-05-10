@@ -22,10 +22,6 @@
 - [Roles del Sistema](#-roles-del-sistema)
 - [Tecnologías Usadas](#-tecnologías-usadas)
 - [Instalación y Configuración](#-instalación-y-configuración)
-- [Ejecución](#-ejecución)
-- [Pruebas](#-pruebas)
-- [Documentación](#-documentación)
-- [FAQ](#-faq)
 
 ---
 
